@@ -41,11 +41,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Toaster, toast } from "sonner";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Toaster } from "sonner";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
+import { WhatsAppButton } from "./WhatsAppButton";
+import { WHATSAPP_DISPLAY, buildWhatsAppUrl, trackWhatsAppClick, type ServiceKey } from "@/lib/whatsapp";
 
 const nav = [
   { label: "Services", href: "#services" },
@@ -60,6 +59,7 @@ const nav = [
 const services = [
   {
     icon: Workflow,
+    key: "ai-automation" as ServiceKey,
     color: "text-accent-blue",
     bg: "bg-accent-blue/10",
     border: "hover:border-accent-blue/40",
@@ -69,6 +69,7 @@ const services = [
   },
   {
     icon: Bot,
+    key: "whatsapp-chatbot" as ServiceKey,
     color: "text-accent-cyan",
     bg: "bg-accent-cyan/10",
     border: "hover:border-accent-cyan/40",
@@ -78,6 +79,7 @@ const services = [
   },
   {
     icon: PhoneCall,
+    key: "voice-agent" as ServiceKey,
     color: "text-accent-purple",
     bg: "bg-accent-purple/10",
     border: "hover:border-accent-purple/40",
@@ -87,6 +89,7 @@ const services = [
   },
   {
     icon: Globe,
+    key: "website" as ServiceKey,
     color: "text-accent-blue",
     bg: "bg-accent-blue/10",
     border: "hover:border-accent-blue/40",
@@ -96,6 +99,7 @@ const services = [
   },
   {
     icon: Video,
+    key: "video-ads" as ServiceKey,
     color: "text-accent-purple",
     bg: "bg-accent-purple/10",
     border: "hover:border-accent-purple/40",
@@ -248,14 +252,6 @@ const faqs = [
   },
 ];
 
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email").max(255),
-  company: z.string().trim().max(120).optional().or(z.literal("")),
-  message: z.string().trim().min(10, "Tell us a bit more").max(1000),
-});
-type ContactValues = z.infer<typeof contactSchema>;
-
 export default function Landing() {
   const [scrolled, setScrolled] = useState(0);
   const [showTop, setShowTop] = useState(false);
@@ -302,11 +298,14 @@ export default function Landing() {
             ))}
           </div>
           <a
-            href="#contact"
-            className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-neutral-100 px-4 py-1.5 text-xs font-semibold text-canvas transition-transform hover:scale-[1.02] active:scale-95"
+            href={buildWhatsAppUrl("general")}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick("nav", "general")}
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-4 py-1.5 text-xs font-semibold text-white ring-1 ring-[#25D366]/60 transition-transform hover:scale-[1.02] active:scale-95"
           >
-            Book Call
-            <ArrowRight className="size-3" />
+            <MessageCircle className="size-3" />
+            Book Free Consultation
           </a>
           <button
             className="md:hidden inline-flex size-9 items-center justify-center rounded-full border border-white/10"
@@ -330,11 +329,17 @@ export default function Landing() {
                 </a>
               ))}
               <a
-                href="#contact"
-                onClick={() => setMenuOpen(false)}
-                className="mt-2 inline-flex items-center justify-center rounded-full bg-neutral-100 px-4 py-2 text-sm font-semibold text-canvas"
+                href={buildWhatsAppUrl("general")}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  setMenuOpen(false);
+                  trackWhatsAppClick("nav-mobile", "general");
+                }}
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white"
               >
-                Book Free Strategy Call
+                <MessageCircle className="size-4" />
+                Book Free Consultation
               </a>
             </div>
           </div>
@@ -390,21 +395,29 @@ export default function Landing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+              className="mt-10 flex flex-col items-center gap-4"
             >
-              <a
-                href="#contact"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent-blue px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-accent-blue/60 transition-all hover:bg-accent-blue/90 hover:shadow-[0_0_40px_-8px_rgba(59,130,246,0.6)] active:scale-95 sm:w-auto"
-              >
-                Book Free Strategy Call
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#services"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-200 backdrop-blur-md transition-colors hover:bg-white/10 sm:w-auto"
-              >
-                View Services
-              </a>
+              <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
+                <WhatsAppButton
+                  serviceKey="general"
+                  source="hero-primary"
+                  label="Book Free Consultation"
+                  variant="primary"
+                />
+                <a
+                  href="#services"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-200 backdrop-blur-md transition-colors hover:bg-white/10 sm:w-auto"
+                >
+                  View Services
+                </a>
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-500">
+                <span className="relative inline-flex size-1.5">
+                  <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-75" />
+                  <span className="relative inline-block size-1.5 rounded-full bg-[#25D366]" />
+                </span>
+                Typically replies within minutes
+              </span>
             </motion.div>
           </div>
 
@@ -508,6 +521,15 @@ export default function Landing() {
                           {t}
                         </span>
                       ))}
+                    </div>
+                    <div className="mt-6 flex flex-col items-start gap-2">
+                      <WhatsAppButton
+                        serviceKey={s.key}
+                        source={`service-${s.key}`}
+                        label="Get Free Consultation"
+                        variant="primary"
+                        showReplyNote
+                      />
                     </div>
                   </div>
                   <div className="hidden md:flex shrink-0">
@@ -688,16 +710,15 @@ export default function Landing() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="#contact"
-                  className={`mt-8 inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
-                    p.highlighted
-                      ? "bg-accent-blue text-white ring-1 ring-accent-blue/60 hover:bg-accent-blue/90"
-                      : "border border-white/10 bg-white/5 text-neutral-100 hover:bg-white/10"
-                  }`}
-                >
-                  {p.name === "Enterprise" ? "Talk to Sales" : "Get Started"}
-                </a>
+                <div className="mt-8">
+                  <WhatsAppButton
+                    serviceKey="general"
+                    source={`pricing-${p.name.toLowerCase()}`}
+                    label={p.name === "Enterprise" ? "Talk to Sales" : "Get Started"}
+                    variant={p.highlighted ? "primary" : "ghost"}
+                    fullWidth
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -725,25 +746,83 @@ export default function Landing() {
           </div>
         </Section>
 
-        {/* Contact */}
-        <Section id="contact" eyebrow="09 — Talk to us" title="Book your free strategy call" desc="Tell us about your business. We'll reply within one business day.">
+        {/* Contact — WhatsApp first */}
+        <Section id="contact" eyebrow="09 — Talk to us" title="Chat with us on WhatsApp" desc="Skip the forms. One tap opens a real conversation with our team.">
           <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-            <ContactForm />
+            <div className="relative overflow-hidden rounded-3xl border border-[#25D366]/20 bg-surface p-8 sm:p-10">
+              <div className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-[#25D366]/10 blur-3xl" />
+              <div className="relative">
+                <div className="inline-flex size-12 items-center justify-center rounded-2xl bg-[#25D366]/15 text-[#25D366]">
+                  <MessageCircle className="size-6" />
+                </div>
+                <h3 className="mt-5 text-2xl sm:text-3xl font-semibold tracking-tight">
+                  Start the conversation
+                </h3>
+                <p className="mt-3 max-w-[52ch] text-sm text-zinc-400">
+                  We reply within minutes on WhatsApp. Send us a quick note about
+                  your business — we'll come back with a tailored plan.
+                </p>
+                <div className="mt-6">
+                  <WhatsAppButton
+                    serviceKey="general"
+                    source="contact-primary"
+                    label={`Chat on WhatsApp · ${WHATSAPP_DISPLAY}`}
+                    variant="primary"
+                    showReplyNote
+                  />
+                </div>
+
+                <div className="mt-10 border-t border-white/5 pt-8">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-zinc-500">
+                    Or pick a service to pre-fill your message
+                  </p>
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                    {services.map((s) => (
+                      <a
+                        key={s.key}
+                        href={buildWhatsAppUrl(s.key)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackWhatsAppClick(`contact-${s.key}`, s.key)}
+                        className="group flex items-center gap-3 rounded-2xl border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-[#25D366]/40 hover:bg-white/[0.04]"
+                      >
+                        <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${s.bg} ${s.color}`}>
+                          <s.icon className="size-4" />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="truncate text-sm font-medium text-neutral-100">
+                            {s.title}
+                          </div>
+                          <div className="text-[11px] text-zinc-500">
+                            Pre-filled brief · one tap
+                          </div>
+                        </div>
+                        <ArrowRight className="size-4 text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:text-[#25D366]" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="flex flex-col gap-3">
               {[
-                { icon: MessageCircle, label: "WhatsApp", value: "+1 (555) 010-0100", href: "https://wa.me/15550100100" },
-                { icon: Mail, label: "Email", value: "hello@visionary-ai.co", href: "mailto:hello@visionary-ai.co" },
-                { icon: PhoneIcon, label: "Phone", value: "+1 (555) 010-0100", href: "tel:+15550100100" },
-                { icon: MapPin, label: "Calendly", value: "Book a 30-min slot", href: "https://calendly.com/" },
+                { icon: MessageCircle, label: "WhatsApp", value: WHATSAPP_DISPLAY, href: buildWhatsAppUrl("general"), track: "contact-tile-whatsapp" },
+                { icon: PhoneIcon, label: "Phone", value: WHATSAPP_DISPLAY, href: "tel:+919491071248", track: "contact-tile-phone" },
+                { icon: Mail, label: "Email", value: "hello@visionary-ai.co", href: "mailto:hello@visionary-ai.co", track: "contact-tile-email" },
+                { icon: MapPin, label: "Availability", value: "Mon–Sat · Replies in minutes", href: buildWhatsAppUrl("general"), track: "contact-tile-availability" },
               ].map((c) => (
                 <a
                   key={c.label}
                   href={c.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-surface p-4 transition-colors hover:border-accent-blue/30"
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    if (c.href.includes("wa.me")) trackWhatsAppClick(c.track, "general");
+                  }}
+                  className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-surface p-4 transition-colors hover:border-[#25D366]/30"
                 >
-                  <div className="flex size-10 items-center justify-center rounded-lg bg-white/5 text-accent-cyan">
+                  <div className="flex size-10 items-center justify-center rounded-lg bg-white/5 text-[#25D366]">
                     <c.icon className="size-4" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -771,16 +850,14 @@ export default function Landing() {
             <p className="mx-auto mt-6 max-w-[46ch] text-pretty text-zinc-400">
               Join 120+ industry leaders redefining operations with Visionary AI.
             </p>
-            <div className="mt-10 flex justify-center">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-neutral-100 py-3.5 pl-6 pr-4 text-sm font-semibold text-canvas transition-transform hover:scale-[1.02] active:scale-95"
-              >
-                Book Your Free Strategy Call
-                <span className="inline-flex size-6 items-center justify-center rounded-full bg-canvas text-neutral-100">
-                  <ArrowRight className="size-3" />
-                </span>
-              </a>
+            <div className="mt-10 flex flex-col items-center gap-3">
+              <WhatsAppButton
+                serviceKey="general"
+                source="final-cta"
+                label="Book Your Free Consultation"
+                variant="primary"
+                showReplyNote
+              />
             </div>
           </div>
         </section>
@@ -837,23 +914,12 @@ export default function Landing() {
         </div>
       </footer>
 
-      {/* Floating WhatsApp */}
-      <a
-        href="https://wa.me/15550100100"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="fixed bottom-6 right-6 z-50 inline-flex size-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_0_30px_-5px_rgba(37,211,102,0.6)] transition-transform hover:scale-105"
-      >
-        <MessageCircle className="size-5" />
-      </a>
-
       {/* Back to top */}
       {showTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
-          className="fixed bottom-6 left-6 z-50 inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-canvas/80 text-neutral-200 backdrop-blur-md transition-transform hover:scale-105"
+          className="fixed bottom-24 left-5 sm:bottom-6 sm:left-auto sm:right-24 z-[58] inline-flex size-10 items-center justify-center rounded-full border border-white/10 bg-canvas/80 text-neutral-200 backdrop-blur-md transition-transform hover:scale-105"
         >
           <ArrowUp className="size-4" />
         </button>
