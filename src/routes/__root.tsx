@@ -83,10 +83,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Premium AI automation agency. Custom AI workflows, WhatsApp chatbots, voice agents, and websites that scale revenue and cut costs." },
       { name: "author", content: "Visionary AI Automations" },
       { property: "og:title", content: "Visionary AI Automations — Enterprise AI Automation Agency" },
-      { property: "og:description", content: "Automate operations, increase revenue, and scale faster with enterprise-grade AI agents." },
+      { property: "og:description", content: "Premium AI automation agency. Custom AI workflows, WhatsApp chatbots, voice agents, and websites that scale revenue and cut costs." },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Visionary AI Automations" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Visionary AI Automations — Enterprise AI Automation Agency" },
+      { name: "twitter:description", content: "Premium AI automation agency. Custom AI workflows, WhatsApp chatbots, voice agents, and websites that scale revenue and cut costs." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Et2MrIYkmcZvSAZzXAbwIsNACJr2/social-images/social-1784552588569-176691.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Et2MrIYkmcZvSAZzXAbwIsNACJr2/social-images/social-1784552588569-176691.webp" },
     ],
     links: [
       {
