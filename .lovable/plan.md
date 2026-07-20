@@ -1,62 +1,50 @@
-## Visionary AI Automations — build plan
+## Goal
+Wire WhatsApp (`+91 94910 71248`) as the primary conversion channel across the entire site, with per-service pre-filled messages, one-click open, floating + sticky CTAs, and analytics tracking.
 
-Premium matte-black AI agency site built on the selected "Obsidian control room" direction. Single-page long-scroll landing (route `/`) with anchor navigation to sections, plus separate routes for legal pages.
+## 1. Central WhatsApp helper
+Create `src/lib/whatsapp.ts`:
+- `WHATSAPP_NUMBER = "919491071248"` and `WHATSAPP_BASE = "https://wa.me/919491071248"`.
+- `SERVICE_MESSAGES` map keyed by service id (`ai-automation`, `whatsapp-chatbot`, `voice-agent`, `website`, `video-ads`, `general`) — the exact multi-line templates from the brief.
+- `buildWhatsAppUrl(key)` → returns `${WHATSAPP_BASE}?text=${encodeURIComponent(message)}`.
+- `trackWhatsAppClick(source, serviceKey)` → fires:
+  - GA4: `window.gtag?.("event", "whatsapp_click", { source, service: serviceKey })`
+  - Meta Pixel: `window.fbq?.("trackCustom", "WhatsAppClick", { source, service: serviceKey })`
+  - Safe no-ops if either isn't loaded.
 
-### Design tokens (locked from selected prototype)
-- Canvas `#050505`, surface `#0a0a0a`
-- Accents: electric blue `#3b82f6`, purple `#a855f7`, cyan `#22d3ee`
-- Typography: Inter (400/500/600/800), tight tracking, large bold headlines
-- Effects: glassmorphism, soft blue glow (`box-shadow: 0 0 40px -10px rgba(59,130,246,0.2)`), animated pulsing gradient logo, subtle blur orbs
-- Corners: `rounded-2xl` cards, `rounded-full` pills/CTAs
-- Load Inter via `<link>` in `__root.tsx` head
+## 2. Reusable `<WhatsAppButton>` component
+`src/components/site/WhatsAppButton.tsx` — a premium button (matches obsidian palette, green WhatsApp accent) that:
+- Accepts `serviceKey`, `source`, `label` (default "Get Free Consultation"), `variant` (primary / ghost / sticky / floating / card), `showReplyNote`.
+- Renders as `<a target="_blank" rel="noopener">` with `href={buildWhatsAppUrl(serviceKey)}` for true one-click open on mobile + desktop.
+- Optional caption underneath: **"Typically replies within minutes"** with a small pulsing green dot.
+- Calls `trackWhatsAppClick` in `onClick`.
 
-### Route structure
-- `/` — full landing page (rewrite `src/routes/index.tsx`, remove placeholder)
-- `/privacy` — Privacy Policy
-- `/terms` — Terms of Service
-- Update `__root.tsx`: real title, description, og tags for "Visionary AI Automations — AI Automation Agency"
+## 3. Replace every CTA with WhatsApp
+In `src/components/site/Landing.tsx`:
+- Hero primary CTA, navbar "Book a call", "See our work" secondary, all mid-page banners → `<WhatsAppButton serviceKey="general" source="hero|nav|banner">`.
+- Each of the 5 service cards gets a **"Get Free Consultation"** `WhatsAppButton` bound to its `serviceKey` + reply note.
+- Pricing tier CTAs → WhatsApp (`source="pricing-<tier>"`, message = general).
+- Portfolio "Start your project" → general.
+- Footer contact list: replace fake `+1 555…` with `+91 94910 71248` and `wa.me/919491071248`.
 
-### Section order on `/`
-1. **Sticky navbar** — pill-shaped floating nav, logo (gradient pulse orb + "Visionary"), desktop menu (Home, Services, Industries, Portfolio, Pricing, About, FAQ, Contact), CTA "Book Call", mobile hamburger sheet
-2. **Hero** — "Intelligence Refined" pill badge, headline "Transform Your Business With AI Automation", subheading, dual CTAs (Book Free Strategy Call / View Services), dashboard visual with blue glow
-3. **Tech stack marquee** — "Engineered with the world's best" with logos: OpenAI, Gemini, Claude, n8n, WhatsApp Business API, ElevenLabs, Supabase, Firebase, Vercel, Cloudflare, Stripe, Razorpay (horizontal auto-scroll)
-4. **Stats counter** — 4 stats (clients served, hours saved, revenue lifted, uptime)
-5. **Core Services** — stacked large cards (matches prototype exactly), 5 services: AI Automation, WhatsApp AI Chatbots, AI Voice Agents, AI Business Websites, AI Video Ads. Each: icon in tinted square, title, description, sub-service pill tags
-6. **Why Choose Us** — 7 tile grid: Fast Delivery, Premium Design, Business Focused, Enterprise Security, Scalable Solutions, Dedicated Support, Latest AI Technology
-7. **How We Work** — 7-step vertical/horizontal rail with connecting line: Consultation → Analysis → Strategy → Development → Testing → Launch → Support
-8. **Industries** — 11 chips/tiles: Healthcare, Real Estate, Education, Restaurants, Manufacturing, Retail, Finance, E-commerce, NGOs, Churches, Professional Services
-9. **Portfolio** — 6 case tiles with category tags (Website, Automation, Chatbot, Voice Agent, Video Ad, Before/After)
-10. **Testimonials** — 3 quote cards with author + role + company
-11. **Pricing** — 4 tiers (Starter, Growth, Business, Enterprise) + Custom Quote card. Growth marked "Most Popular" with blue ring glow
-12. **FAQ** — shadcn Accordion, ~8 questions
-13. **Contact** — split: form (name/email/company/message with zod validation) + info column (WhatsApp, Email, Phone, Calendly link)
-14. **Final CTA** — "Ready to automate?" gradient panel with primary CTA
-15. **Footer** — logo, tagline, quick links (Services, Industries, Portfolio, Pricing, About), Legal (Privacy, Terms), Social icons, copyright
+## 4. Contact section
+Replace the existing form with a large **WhatsApp-first** panel:
+- Big "Chat on WhatsApp" `WhatsAppButton` (general message), reply note, and 5 secondary quick-start buttons — one per service — each pre-filling that service's template.
+- Keep email/phone/location as small secondary tiles. No form gate.
 
-### Extra features
-- Floating WhatsApp button (bottom-right)
-- Scroll-progress bar (top, thin gradient)
-- Back-to-top button (appears after scroll)
-- Smooth scroll for anchor nav
-- Framer Motion fade-up on section reveal
-- Sticky CTA reappears in mobile footer bar
+## 5. Floating + sticky CTAs
+- Upgrade the existing floating WhatsApp bubble (bottom-right) to use the helper, add pulsing ring, tooltip "Chat with us — replies in minutes", tracked as `source="floating"`.
+- Add a new **sticky "Book Free Consultation"** pill (bottom-center on mobile, bottom-left on desktop) that appears after 400px scroll, tracked as `source="sticky"`. Both visible on all routes since they live in `Landing`; also mount the floating one in `__root.tsx` so it appears on `/privacy` and `/terms`.
 
-### Component breakdown (all in `src/components/site/`)
-- `Navbar.tsx`, `Hero.tsx`, `TechMarquee.tsx`, `Stats.tsx`, `Services.tsx`, `WhyChooseUs.tsx`, `Process.tsx`, `Industries.tsx`, `Portfolio.tsx`, `Testimonials.tsx`, `Pricing.tsx`, `Faq.tsx`, `Contact.tsx`, `FinalCta.tsx`, `Footer.tsx`, `FloatingWhatsApp.tsx`, `ScrollProgress.tsx`, `BackToTop.tsx`
+## 6. Analytics loaders
+In `src/routes/__root.tsx` `head()`, add GA4 (`gtag.js`) and Meta Pixel `<script>` tags with placeholder IDs (`GA4_MEASUREMENT_ID`, `META_PIXEL_ID`) documented in a comment for the user to swap. Initialize `dataLayer` and `fbq` so `trackWhatsAppClick` is safe pre-load.
 
-### Technical notes
-- Add design tokens to `src/styles.css` under `@theme inline` (`--color-accent-blue`, `--color-accent-purple`, `--color-accent-cyan`, `--color-surface`); keep existing shadcn tokens
-- Install: `framer-motion`, `lucide-react` (icons), `react-hook-form`, `@hookform/resolvers`, `zod` (form validation)
-- Hero visual: generate one dark dashboard image via imagegen and place it in the hero glow frame
-- Portfolio thumbs: use generated placeholder images (dark abstract UI/product shots)
-- Contact form: client-only submit → toast success (no backend; Lovable Cloud not enabled per user request)
-- SEO: proper `head()` on `/`, `/privacy`, `/terms` with distinct titles/descriptions/og tags; JSON-LD Organization schema on root
-- Fully responsive; mobile-first; icon buttons get `aria-label`; single `<main>` per page
+## 7. QA / polish
+- All links use `https://wa.me/919491071248?text=…` with `encodeURIComponent` (verified multi-line preserved).
+- Buttons keep obsidian premium styling; WhatsApp accent color added as `--accent-whatsapp: 142 70% 45%` token in `src/styles.css`.
+- Fully responsive; sticky + floating don't overlap on mobile (stacked with safe-area padding).
+- No forms, no modals — one tap → WhatsApp.
 
-### What's out of scope for this build
-- No Lovable Cloud / database (no auth, no CMS, no persisted form submissions)
-- No live chat widget, no animated cursor, no premium loader, no blog, no newsletter backend
-- No dark-mode toggle (site is already premium-dark by default)
-- Real Calendly link and WhatsApp number use placeholders you can swap later
-
-Confirm and I'll build it.
+## Technical notes
+- Because `wa.me` links must open in a new tab reliably on iOS Safari, use `<a href target="_blank" rel="noopener noreferrer">` — do not `window.open` from JS (popup blockers).
+- Analytics IDs will be placeholders; user can replace them or store as `VITE_GA4_ID` / `VITE_META_PIXEL_ID` env vars — I'll wire both paths.
+- No backend changes; entirely frontend/presentation.
