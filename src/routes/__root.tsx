@@ -12,10 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { GlobalWhatsAppLayer } from "../components/site/WhatsAppButton";
-
-// Replace these placeholders with your real IDs (or wire via VITE_GA4_ID / VITE_META_PIXEL_ID env vars).
-const GA4_ID = (import.meta.env.VITE_GA4_ID as string | undefined) || "G-XXXXXXX";
-const META_PIXEL_ID = (import.meta.env.VITE_META_PIXEL_ID as string | undefined) || "XXXXXXXXXXXXXXXX";
+import { AnalyticsLoader } from "../components/site/AnalyticsLoader";
 
 function NotFoundComponent() {
   return (
@@ -101,17 +98,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" },
     ],
-    scripts: [
-      // Google Analytics 4 (gtag.js)
-      { src: `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`, async: true },
-      {
-        children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${GA4_ID}');`,
-      },
-      // Meta Pixel
-      {
-        children: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`,
-      },
-    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -140,6 +126,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <AnalyticsLoader />
       <GlobalWhatsAppLayer />
     </QueryClientProvider>
   );
