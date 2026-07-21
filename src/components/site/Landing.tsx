@@ -638,60 +638,14 @@ export default function Landing() {
           </div>
         </Section>
 
-        {/* Pricing */}
-        <Section id="pricing" eyebrow="07 — Investment" title="Scale your intelligence" desc="Transparent plans. Cancel or upgrade any month.">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {pricing.map((p) => (
-              <div
-                key={p.name}
-                className={`relative flex flex-col rounded-2xl border p-6 ${
-                  p.highlighted
-                    ? "border-accent-blue/50 bg-surface ring-1 ring-accent-blue/30 glow-blue"
-                    : "border-white/5 bg-surface"
-                }`}
-              >
-                {p.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent-blue px-3 py-1 text-[10px] font-bold uppercase text-white">
-                    Most Popular
-                  </div>
-                )}
-                <p
-                  className={`text-xs font-semibold uppercase tracking-[0.2em] ${
-                    p.highlighted ? "text-accent-blue" : "text-zinc-500"
-                  }`}
-                >
-                  {p.name}
-                </p>
-                <p className="mt-4 text-3xl font-semibold tracking-tight text-neutral-100">
-                  {p.price}
-                  <span className="text-sm font-normal text-zinc-500">
-                    {p.cadence}
-                  </span>
-                </p>
-                <p className="mt-2 text-sm text-zinc-400">{p.desc}</p>
-                <ul className="mt-6 space-y-3 border-t border-white/5 pt-6">
-                  {p.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-start gap-2 text-sm text-zinc-300"
-                    >
-                      <Check className="mt-0.5 size-4 shrink-0 text-accent-cyan" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  <WhatsAppButton
-                    serviceKey="general"
-                    source={`pricing-${p.name.toLowerCase()}`}
-                    label={p.name === "Enterprise" ? "Talk to Sales" : "Get Started"}
-                    variant={p.highlighted ? "primary" : "ghost"}
-                    fullWidth
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Premium AI Showcase */}
+        <Section
+          id="showcase"
+          eyebrow="07 — Live Demo"
+          title="A guided tour of Visionary intelligence"
+          desc="An interactive slideshow through every capability — automation, chatbots, voice, receptionists, admin AI, websites, landing pages, and video ads."
+        >
+          <AIShowcase />
         </Section>
 
         {/* FAQ */}
