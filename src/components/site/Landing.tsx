@@ -169,56 +169,6 @@ const techStack = [
   "Razorpay",
 ];
 
-const pricing = [
-  {
-    name: "Starter",
-    price: "$1,500",
-    cadence: "/mo",
-    desc: "One automation, live in 2 weeks.",
-    features: ["1 Custom Automation", "1 Chatbot Flow", "Email Support", "Basic Analytics"],
-    highlighted: false,
-  },
-  {
-    name: "Growth",
-    price: "$3,500",
-    cadence: "/mo",
-    desc: "Multi-channel automation stack.",
-    features: [
-      "3 Custom Automations",
-      "WhatsApp Sales Bot",
-      "Standard Voice Agent",
-      "Priority Support",
-    ],
-    highlighted: true,
-  },
-  {
-    name: "Business",
-    price: "$6,500",
-    cadence: "/mo",
-    desc: "Full department replacement.",
-    features: [
-      "Unlimited Automations",
-      "Sales + Support Bots",
-      "Inbound + Outbound Voice",
-      "Dedicated Manager",
-    ],
-    highlighted: false,
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    cadence: "",
-    desc: "Bespoke deployment at scale.",
-    features: [
-      "White-glove build",
-      "SLA & security review",
-      "On-prem / VPC options",
-      "24/7 engineering",
-    ],
-    highlighted: false,
-  },
-];
-
 const faqs = [
   {
     q: "How fast can you deliver a project?",
