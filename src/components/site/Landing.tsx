@@ -45,12 +45,14 @@ import { Toaster } from "sonner";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { WHATSAPP_DISPLAY, buildWhatsAppUrl, trackWhatsAppClick, type ServiceKey } from "@/lib/whatsapp";
+import { getFormUrl, trackFormClick } from "@/lib/forms";
+import { AIShowcase } from "./AIShowcase";
 
 const nav = [
   { label: "Services", href: "#services" },
+  { label: "Showcase", href: "#showcase" },
   { label: "Industries", href: "#industries" },
   { label: "Portfolio", href: "#portfolio" },
-  { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
@@ -165,56 +167,6 @@ const techStack = [
   "Cloudflare",
   "Stripe",
   "Razorpay",
-];
-
-const pricing = [
-  {
-    name: "Starter",
-    price: "$1,500",
-    cadence: "/mo",
-    desc: "One automation, live in 2 weeks.",
-    features: ["1 Custom Automation", "1 Chatbot Flow", "Email Support", "Basic Analytics"],
-    highlighted: false,
-  },
-  {
-    name: "Growth",
-    price: "$3,500",
-    cadence: "/mo",
-    desc: "Multi-channel automation stack.",
-    features: [
-      "3 Custom Automations",
-      "WhatsApp Sales Bot",
-      "Standard Voice Agent",
-      "Priority Support",
-    ],
-    highlighted: true,
-  },
-  {
-    name: "Business",
-    price: "$6,500",
-    cadence: "/mo",
-    desc: "Full department replacement.",
-    features: [
-      "Unlimited Automations",
-      "Sales + Support Bots",
-      "Inbound + Outbound Voice",
-      "Dedicated Manager",
-    ],
-    highlighted: false,
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    cadence: "",
-    desc: "Bespoke deployment at scale.",
-    features: [
-      "White-glove build",
-      "SLA & security review",
-      "On-prem / VPC options",
-      "24/7 engineering",
-    ],
-    highlighted: false,
-  },
 ];
 
 const faqs = [
@@ -522,14 +474,32 @@ export default function Landing() {
                         </span>
                       ))}
                     </div>
-                    <div className="mt-6 flex flex-col items-start gap-2">
-                      <WhatsAppButton
-                        serviceKey={s.key}
-                        source={`service-${s.key}`}
-                        label="Get Free Consultation"
-                        variant="primary"
-                        showReplyNote
-                      />
+                    <div className="mt-6 flex flex-col items-start gap-3">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                        <WhatsAppButton
+                          serviceKey={s.key}
+                          source={`service-${s.key}`}
+                          label="Get Free Consultation"
+                          variant="primary"
+                        />
+                        <a
+                          href={getFormUrl(s.key)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackFormClick(`service-${s.key}`, s.key)}
+                          className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-100 backdrop-blur-md transition-colors hover:bg-white/10"
+                        >
+                          Submit Requirements
+                          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                        </a>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-500">
+                        <span className="relative inline-flex size-1.5">
+                          <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-75" />
+                          <span className="relative inline-block size-1.5 rounded-full bg-[#25D366]" />
+                        </span>
+                        Typically replies within minutes
+                      </span>
                     </div>
                   </div>
                   <div className="hidden md:flex shrink-0">
@@ -668,60 +638,14 @@ export default function Landing() {
           </div>
         </Section>
 
-        {/* Pricing */}
-        <Section id="pricing" eyebrow="07 — Investment" title="Scale your intelligence" desc="Transparent plans. Cancel or upgrade any month.">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {pricing.map((p) => (
-              <div
-                key={p.name}
-                className={`relative flex flex-col rounded-2xl border p-6 ${
-                  p.highlighted
-                    ? "border-accent-blue/50 bg-surface ring-1 ring-accent-blue/30 glow-blue"
-                    : "border-white/5 bg-surface"
-                }`}
-              >
-                {p.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent-blue px-3 py-1 text-[10px] font-bold uppercase text-white">
-                    Most Popular
-                  </div>
-                )}
-                <p
-                  className={`text-xs font-semibold uppercase tracking-[0.2em] ${
-                    p.highlighted ? "text-accent-blue" : "text-zinc-500"
-                  }`}
-                >
-                  {p.name}
-                </p>
-                <p className="mt-4 text-3xl font-semibold tracking-tight text-neutral-100">
-                  {p.price}
-                  <span className="text-sm font-normal text-zinc-500">
-                    {p.cadence}
-                  </span>
-                </p>
-                <p className="mt-2 text-sm text-zinc-400">{p.desc}</p>
-                <ul className="mt-6 space-y-3 border-t border-white/5 pt-6">
-                  {p.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-start gap-2 text-sm text-zinc-300"
-                    >
-                      <Check className="mt-0.5 size-4 shrink-0 text-accent-cyan" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  <WhatsAppButton
-                    serviceKey="general"
-                    source={`pricing-${p.name.toLowerCase()}`}
-                    label={p.name === "Enterprise" ? "Talk to Sales" : "Get Started"}
-                    variant={p.highlighted ? "primary" : "ghost"}
-                    fullWidth
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Premium AI Showcase */}
+        <Section
+          id="showcase"
+          eyebrow="07 — Live Demo"
+          title="A guided tour of Visionary intelligence"
+          desc="An interactive slideshow through every capability — automation, chatbots, voice, receptionists, admin AI, websites, landing pages, and video ads."
+        >
+          <AIShowcase />
         </Section>
 
         {/* FAQ */}
@@ -880,8 +804,8 @@ export default function Landing() {
               title="Agency"
               links={[
                 { l: "Services", h: "#services" },
+                { l: "Showcase", h: "#showcase" },
                 { l: "Portfolio", h: "#portfolio" },
-                { l: "Pricing", h: "#pricing" },
                 { l: "Contact", h: "#contact" },
               ]}
             />
@@ -896,7 +820,6 @@ export default function Landing() {
             <FooterCol
               title="Legal"
               links={[
-                { l: "Privacy", h: "/privacy" },
                 { l: "Terms", h: "/terms" },
               ]}
             />
