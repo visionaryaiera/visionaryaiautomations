@@ -474,14 +474,32 @@ export default function Landing() {
                         </span>
                       ))}
                     </div>
-                    <div className="mt-6 flex flex-col items-start gap-2">
-                      <WhatsAppButton
-                        serviceKey={s.key}
-                        source={`service-${s.key}`}
-                        label="Get Free Consultation"
-                        variant="primary"
-                        showReplyNote
-                      />
+                    <div className="mt-6 flex flex-col items-start gap-3">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                        <WhatsAppButton
+                          serviceKey={s.key}
+                          source={`service-${s.key}`}
+                          label="Get Free Consultation"
+                          variant="primary"
+                        />
+                        <a
+                          href={getFormUrl(s.key)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => trackFormClick(`service-${s.key}`, s.key)}
+                          className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-100 backdrop-blur-md transition-colors hover:bg-white/10"
+                        >
+                          Submit Requirements
+                          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                        </a>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-500">
+                        <span className="relative inline-flex size-1.5">
+                          <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-75" />
+                          <span className="relative inline-block size-1.5 rounded-full bg-[#25D366]" />
+                        </span>
+                        Typically replies within minutes
+                      </span>
                     </div>
                   </div>
                   <div className="hidden md:flex shrink-0">
