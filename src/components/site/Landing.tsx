@@ -45,12 +45,14 @@ import { Toaster } from "sonner";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { WHATSAPP_DISPLAY, buildWhatsAppUrl, trackWhatsAppClick, type ServiceKey } from "@/lib/whatsapp";
+import { getFormUrl, trackFormClick } from "@/lib/forms";
+import { AIShowcase } from "./AIShowcase";
 
 const nav = [
   { label: "Services", href: "#services" },
+  { label: "Showcase", href: "#showcase" },
   { label: "Industries", href: "#industries" },
   { label: "Portfolio", href: "#portfolio" },
-  { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
