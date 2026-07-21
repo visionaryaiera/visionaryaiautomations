@@ -804,8 +804,8 @@ export default function Landing() {
               title="Agency"
               links={[
                 { l: "Services", h: "#services" },
+                { l: "Showcase", h: "#showcase" },
                 { l: "Portfolio", h: "#portfolio" },
-                { l: "Pricing", h: "#pricing" },
                 { l: "Contact", h: "#contact" },
               ]}
             />
@@ -820,7 +820,6 @@ export default function Landing() {
             <FooterCol
               title="Legal"
               links={[
-                { l: "Privacy", h: "/privacy" },
                 { l: "Terms", h: "/terms" },
               ]}
             />
