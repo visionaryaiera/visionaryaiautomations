@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as IndexRouteImport } from './routes/index'
@@ -19,6 +20,11 @@ import { Route as ServicesAiVideoAdsRouteImport } from './routes/services.ai-vid
 import { Route as ServicesAiBusinessWebsiteRouteImport } from './routes/services.ai-business-website'
 import { Route as ServicesAiAutomationRouteImport } from './routes/services.ai-automation'
 
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
   '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
   '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
   '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/'
     | '/privacy'
     | '/terms'
+    | '/thank-you'
     | '/services/ai-automation'
     | '/services/ai-business-website'
     | '/services/ai-video-ads'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/privacy'
     | '/terms'
+    | '/thank-you'
     | '/services/ai-automation'
     | '/services/ai-business-website'
     | '/services/ai-video-ads'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/'
     | '/privacy'
     | '/terms'
+    | '/thank-you'
     | '/services/ai-automation'
     | '/services/ai-business-website'
     | '/services/ai-video-ads'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  ThankYouRoute: typeof ThankYouRoute
   ServicesAiAutomationRoute: typeof ServicesAiAutomationRoute
   ServicesAiBusinessWebsiteRoute: typeof ServicesAiBusinessWebsiteRoute
   ServicesAiVideoAdsRoute: typeof ServicesAiVideoAdsRoute
@@ -150,6 +163,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  ThankYouRoute: ThankYouRoute,
   ServicesAiAutomationRoute: ServicesAiAutomationRoute,
   ServicesAiBusinessWebsiteRoute: ServicesAiBusinessWebsiteRoute,
   ServicesAiVideoAdsRoute: ServicesAiVideoAdsRoute,

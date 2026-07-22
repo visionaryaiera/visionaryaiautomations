@@ -47,6 +47,7 @@ import { WhatsAppButton } from "./WhatsAppButton";
 import { WHATSAPP_DISPLAY, buildWhatsAppUrl, trackWhatsAppClick, type ServiceKey } from "@/lib/whatsapp";
 import { getFormUrl, trackFormClick } from "@/lib/forms";
 import { AIShowcase } from "./AIShowcase";
+import { getServiceByKey } from "@/lib/services";
 
 const nav = [
   { label: "Services", href: "#services" },
