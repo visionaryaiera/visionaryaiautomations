@@ -494,13 +494,13 @@ export default function Landing() {
                           <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
                         </a>
                         {getServiceByKey(s.key) ? (
-                          <Link
-                            to={`/services/${getServiceByKey(s.key)!.slug}` as string}
+                          <a
+                            href={`/services/${getServiceByKey(s.key)!.slug}`}
                             className="group inline-flex items-center justify-center gap-2 rounded-full px-4 py-3.5 text-sm font-semibold text-zinc-300 transition-colors hover:text-white"
                           >
                             Explore service
                             <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-                          </Link>
+                          </a>
                         ) : null}
                       </div>
                       <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-500">
