@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SettingsAnalyticsRouteImport } from './routes/settings.analytics'
 import { Route as ServicesWhatsappChatbotRouteImport } from './routes/services.whatsapp-chatbot'
 import { Route as ServicesVoiceAgentRouteImport } from './routes/services.voice-agent'
+import { Route as ServicesAiBusinessWebsiteRouteImport } from './routes/services.ai-business-website'
 import { Route as ServicesAiAutomationRouteImport } from './routes/services.ai-automation'
 
 const TermsRoute = TermsRouteImport.update({
@@ -47,6 +48,12 @@ const ServicesVoiceAgentRoute = ServicesVoiceAgentRouteImport.update({
   path: '/services/voice-agent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesAiBusinessWebsiteRoute =
+  ServicesAiBusinessWebsiteRouteImport.update({
+    id: '/services/ai-business-website',
+    path: '/services/ai-business-website',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesAiAutomationRoute = ServicesAiAutomationRouteImport.update({
   id: '/services/ai-automation',
   path: '/services/ai-automation',
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
+  '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/voice-agent': typeof ServicesVoiceAgentRoute
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
@@ -67,6 +75,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
+  '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/voice-agent': typeof ServicesVoiceAgentRoute
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
@@ -77,6 +86,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
+  '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/voice-agent': typeof ServicesVoiceAgentRoute
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/services/ai-automation'
+    | '/services/ai-business-website'
     | '/services/voice-agent'
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/services/ai-automation'
+    | '/services/ai-business-website'
     | '/services/voice-agent'
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
@@ -106,6 +118,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/services/ai-automation'
+    | '/services/ai-business-website'
     | '/services/voice-agent'
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
@@ -116,6 +129,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
   ServicesAiAutomationRoute: typeof ServicesAiAutomationRoute
+  ServicesAiBusinessWebsiteRoute: typeof ServicesAiBusinessWebsiteRoute
   ServicesVoiceAgentRoute: typeof ServicesVoiceAgentRoute
   ServicesWhatsappChatbotRoute: typeof ServicesWhatsappChatbotRoute
   SettingsAnalyticsRoute: typeof SettingsAnalyticsRoute
@@ -165,6 +179,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesVoiceAgentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/ai-business-website': {
+      id: '/services/ai-business-website'
+      path: '/services/ai-business-website'
+      fullPath: '/services/ai-business-website'
+      preLoaderRoute: typeof ServicesAiBusinessWebsiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/ai-automation': {
       id: '/services/ai-automation'
       path: '/services/ai-automation'
@@ -180,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
   ServicesAiAutomationRoute: ServicesAiAutomationRoute,
+  ServicesAiBusinessWebsiteRoute: ServicesAiBusinessWebsiteRoute,
   ServicesVoiceAgentRoute: ServicesVoiceAgentRoute,
   ServicesWhatsappChatbotRoute: ServicesWhatsappChatbotRoute,
   SettingsAnalyticsRoute: SettingsAnalyticsRoute,
