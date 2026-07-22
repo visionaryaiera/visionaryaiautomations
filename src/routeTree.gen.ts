@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SettingsAnalyticsRouteImport } from './routes/settings.analytics'
+import { Route as ServicesWhatsappChatbotRouteImport } from './routes/services.whatsapp-chatbot'
 import { Route as ServicesAiAutomationRouteImport } from './routes/services.ai-automation'
 
 const TermsRoute = TermsRouteImport.update({
@@ -35,6 +36,11 @@ const SettingsAnalyticsRoute = SettingsAnalyticsRouteImport.update({
   path: '/settings/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesWhatsappChatbotRoute = ServicesWhatsappChatbotRouteImport.update({
+  id: '/services/whatsapp-chatbot',
+  path: '/services/whatsapp-chatbot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesAiAutomationRoute = ServicesAiAutomationRouteImport.update({
   id: '/services/ai-automation',
   path: '/services/ai-automation',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
+  '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
+  '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
 }
 export interface FileRoutesById {
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
+  '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
 }
 export interface FileRouteTypes {
@@ -70,6 +79,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/services/ai-automation'
+    | '/services/whatsapp-chatbot'
     | '/settings/analytics'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -77,6 +87,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/services/ai-automation'
+    | '/services/whatsapp-chatbot'
     | '/settings/analytics'
   id:
     | '__root__'
@@ -84,6 +95,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/services/ai-automation'
+    | '/services/whatsapp-chatbot'
     | '/settings/analytics'
   fileRoutesById: FileRoutesById
 }
@@ -92,6 +104,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
   ServicesAiAutomationRoute: typeof ServicesAiAutomationRoute
+  ServicesWhatsappChatbotRoute: typeof ServicesWhatsappChatbotRoute
   SettingsAnalyticsRoute: typeof SettingsAnalyticsRoute
 }
 
@@ -125,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsAnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/whatsapp-chatbot': {
+      id: '/services/whatsapp-chatbot'
+      path: '/services/whatsapp-chatbot'
+      fullPath: '/services/whatsapp-chatbot'
+      preLoaderRoute: typeof ServicesWhatsappChatbotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/ai-automation': {
       id: '/services/ai-automation'
       path: '/services/ai-automation'
@@ -140,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
   ServicesAiAutomationRoute: ServicesAiAutomationRoute,
+  ServicesWhatsappChatbotRoute: ServicesWhatsappChatbotRoute,
   SettingsAnalyticsRoute: SettingsAnalyticsRoute,
 }
 export const routeTree = rootRouteImport
