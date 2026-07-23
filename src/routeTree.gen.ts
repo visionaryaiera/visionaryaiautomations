@@ -13,6 +13,7 @@ import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SettingsFormsRouteImport } from './routes/settings.forms'
 import { Route as SettingsAnalyticsRouteImport } from './routes/settings.analytics'
 import { Route as ServicesWhatsappChatbotRouteImport } from './routes/services.whatsapp-chatbot'
 import { Route as ServicesVoiceAgentRouteImport } from './routes/services.voice-agent'
@@ -38,6 +39,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsFormsRoute = SettingsFormsRouteImport.update({
+  id: '/settings/forms',
+  path: '/settings/forms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsAnalyticsRoute = SettingsAnalyticsRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/services/voice-agent': typeof ServicesVoiceAgentRoute
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
+  '/settings/forms': typeof SettingsFormsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/services/voice-agent': typeof ServicesVoiceAgentRoute
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
+  '/settings/forms': typeof SettingsFormsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   '/services/voice-agent': typeof ServicesVoiceAgentRoute
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
+  '/settings/forms': typeof SettingsFormsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
     | '/services/voice-agent'
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
+    | '/settings/forms'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -134,6 +144,7 @@ export interface FileRouteTypes {
     | '/services/voice-agent'
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
+    | '/settings/forms'
   id:
     | '__root__'
     | '/'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/services/voice-agent'
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
+    | '/settings/forms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -159,6 +171,7 @@ export interface RootRouteChildren {
   ServicesVoiceAgentRoute: typeof ServicesVoiceAgentRoute
   ServicesWhatsappChatbotRoute: typeof ServicesWhatsappChatbotRoute
   SettingsAnalyticsRoute: typeof SettingsAnalyticsRoute
+  SettingsFormsRoute: typeof SettingsFormsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -189,6 +202,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/forms': {
+      id: '/settings/forms'
+      path: '/settings/forms'
+      fullPath: '/settings/forms'
+      preLoaderRoute: typeof SettingsFormsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings/analytics': {
@@ -247,6 +267,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesVoiceAgentRoute: ServicesVoiceAgentRoute,
   ServicesWhatsappChatbotRoute: ServicesWhatsappChatbotRoute,
   SettingsAnalyticsRoute: SettingsAnalyticsRoute,
+  SettingsFormsRoute: SettingsFormsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
