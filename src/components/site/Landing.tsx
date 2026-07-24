@@ -749,6 +749,12 @@ export default function Landing() {
 
         {/* FAQ */}
         <Section id="faq" eyebrow="08 — Answers" title="Frequently asked" desc="Everything operators ask before signing.">
+
+        </Section>
+
+        {/* Restored FAQ below — placeholder removed */}
+
+
           <div className="mx-auto max-w-3xl rounded-3xl border border-white/5 bg-surface p-2 sm:p-4">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((f, i) => (
