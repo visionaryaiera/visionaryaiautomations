@@ -34,6 +34,11 @@ import {
   HeartHandshake,
   Church,
   Briefcase,
+  Rocket,
+  Award,
+  Clock,
+  BadgeCheck,
+  Cpu,
 } from "lucide-react";
 import {
   Accordion,
@@ -123,13 +128,14 @@ const whyUs = [
 ];
 
 const process = [
-  "Free Consultation",
-  "Business Analysis",
-  "AI Strategy",
-  "Development",
-  "Testing",
-  "Launch",
-  "Support",
+  "Lead",
+  "WhatsApp",
+  "AI Agent",
+  "CRM",
+  "Follow-up",
+  "Booking",
+  "Payment",
+  "Success",
 ];
 
 const industries = [
@@ -328,9 +334,9 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="mt-8 text-balance text-center text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
             >
-              Transform Your Business With{" "}
+              Automate Your Business.{" "}
               <span className="bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan bg-clip-text text-transparent">
-                AI Automation
+                Accelerate Your Growth.
               </span>
             </motion.h1>
 
@@ -340,8 +346,8 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto mt-6 max-w-[52ch] text-pretty text-center text-base sm:text-lg text-zinc-400"
             >
-              Automate operations. Increase revenue. Reduce costs. Scale faster
-              with enterprise-grade AI agents engineered for the modern era.
+              Helping businesses automate operations with AI, WhatsApp Automation,
+              AI Voice Agents, Chatbots, CRM Automation, and Digital Marketing.
             </motion.p>
 
             <motion.div
@@ -394,6 +400,26 @@ export default function Landing() {
               </div>
             </div>
           </motion.div>
+        </section>
+
+        {/* Trust Bar */}
+        <section className="mx-auto max-w-6xl px-6 pb-8">
+          <div className="grid grid-cols-2 gap-3 rounded-2xl border border-white/5 bg-surface/60 p-4 sm:grid-cols-5">
+            {[
+              { icon: Award, label: "100+ Projects" },
+              { icon: Rocket, label: "Fast Delivery" },
+              { icon: BadgeCheck, label: "Business Automation" },
+              { icon: Cpu, label: "AI Powered" },
+              { icon: Clock, label: "24/7 Support" },
+            ].map((t) => (
+              <div key={t.label} className="flex items-center gap-2.5 rounded-xl px-3 py-2">
+                <span className="flex size-8 items-center justify-center rounded-lg bg-accent-blue/10 text-accent-cyan">
+                  <t.icon className="size-4" />
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-neutral-200">{t.label}</span>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Tech marquee */}
