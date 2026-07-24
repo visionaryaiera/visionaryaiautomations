@@ -13,6 +13,7 @@ import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SettingsGithubRouteImport } from './routes/settings.github'
 import { Route as SettingsFormsRouteImport } from './routes/settings.forms'
 import { Route as SettingsAnalyticsRouteImport } from './routes/settings.analytics'
 import { Route as ServicesWhatsappChatbotRouteImport } from './routes/services.whatsapp-chatbot'
@@ -39,6 +40,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsGithubRoute = SettingsGithubRouteImport.update({
+  id: '/settings/github',
+  path: '/settings/github',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsFormsRoute = SettingsFormsRouteImport.update({
@@ -90,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
   '/settings/forms': typeof SettingsFormsRoute
+  '/settings/github': typeof SettingsGithubRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
   '/settings/forms': typeof SettingsFormsRoute
+  '/settings/github': typeof SettingsGithubRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/services/whatsapp-chatbot': typeof ServicesWhatsappChatbotRoute
   '/settings/analytics': typeof SettingsAnalyticsRoute
   '/settings/forms': typeof SettingsFormsRoute
+  '/settings/github': typeof SettingsGithubRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
     | '/settings/forms'
+    | '/settings/github'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -145,6 +155,7 @@ export interface FileRouteTypes {
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
     | '/settings/forms'
+    | '/settings/github'
   id:
     | '__root__'
     | '/'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
     | '/services/whatsapp-chatbot'
     | '/settings/analytics'
     | '/settings/forms'
+    | '/settings/github'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -172,6 +184,7 @@ export interface RootRouteChildren {
   ServicesWhatsappChatbotRoute: typeof ServicesWhatsappChatbotRoute
   SettingsAnalyticsRoute: typeof SettingsAnalyticsRoute
   SettingsFormsRoute: typeof SettingsFormsRoute
+  SettingsGithubRoute: typeof SettingsGithubRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -202,6 +215,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/github': {
+      id: '/settings/github'
+      path: '/settings/github'
+      fullPath: '/settings/github'
+      preLoaderRoute: typeof SettingsGithubRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings/forms': {
@@ -268,6 +288,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesWhatsappChatbotRoute: ServicesWhatsappChatbotRoute,
   SettingsAnalyticsRoute: SettingsAnalyticsRoute,
   SettingsFormsRoute: SettingsFormsRoute,
+  SettingsGithubRoute: SettingsGithubRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

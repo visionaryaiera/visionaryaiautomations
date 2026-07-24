@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Github, CheckCircle2, XCircle, RefreshCw, ExternalLink, GitBranch, Clock } from "lucide-react";
+import { Code2, CheckCircle2, XCircle, RefreshCw, ExternalLink, GitBranch, Clock } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 
@@ -88,7 +88,9 @@ function GitHubSettings() {
         return;
       }
       const data = await res.json();
-      let lastCommit: RepoStatus extends { state: "ok"; lastCommit?: infer C } ? C : undefined = undefined;
+      let lastCommit:
+        | { sha: string; message: string; author: string; date: string; url: string }
+        | undefined;
       try {
         const cRes = await fetch(`${base}/commits/${data.default_branch}`, {
           headers: { Accept: "application/vnd.github+json" },
@@ -131,7 +133,7 @@ function GitHubSettings() {
 
         <div className="mt-6 flex items-center gap-3">
           <span className="flex size-10 items-center justify-center rounded-2xl bg-white/5 ring-1 ring-white/10">
-            <Github className="size-5" />
+            <Code2 className="size-5" />
           </span>
           <div>
             <h1 className="text-2xl font-semibold tracking-tight">GitHub sync status</h1>
