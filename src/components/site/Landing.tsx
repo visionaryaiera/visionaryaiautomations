@@ -59,6 +59,7 @@ const nav = [
   { label: "Showcase", href: "#showcase" },
   { label: "Industries", href: "#industries" },
   { label: "Portfolio", href: "#portfolio" },
+  { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
@@ -469,6 +470,68 @@ export default function Landing() {
 
         {/* Services */}
         <Section id="services" eyebrow="01 — Capabilities" title="Core Intelligence" desc="Specialized AI solutions built to integrate seamlessly into your existing workflows.">
+          {/* Expanded capabilities strip */}
+          <div className="mb-8 rounded-3xl border border-white/5 bg-surface/60 p-5 sm:p-6">
+            <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-zinc-500">
+              Full service stack
+            </p>
+            <div className="mt-4 grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  title: "AI & Automation",
+                  color: "text-accent-blue",
+                  items: [
+                    "AI Automation",
+                    "WhatsApp Automation",
+                    "AI Chatbots",
+                    "AI Voice Agents",
+                    "AI Calling Agents",
+                    "CRM Automation",
+                    "Workflow Automation",
+                    "Lead Generation Systems",
+                    "Business Automation",
+                  ],
+                },
+                {
+                  title: "Web Development",
+                  color: "text-accent-cyan",
+                  items: [
+                    "Website Development",
+                    "Landing Pages",
+                    "E-Commerce Websites",
+                    "WordPress Websites",
+                  ],
+                },
+                {
+                  title: "Performance Marketing",
+                  color: "text-accent-purple",
+                  items: [
+                    "Google Ads",
+                    "Facebook Ads",
+                    "Instagram Ads",
+                    "YouTube Ads",
+                    "Video Ads",
+                    "Voice Over Services",
+                  ],
+                },
+              ].map((g) => (
+                <div key={g.title}>
+                  <h4 className={`text-sm font-semibold ${g.color}`}>{g.title}</h4>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {g.items.map((it) => (
+                      <span
+                        key={it}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-zinc-300"
+                      >
+                        {it}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="grid gap-4">
             {services.map((s, i) => (
               <motion.div
