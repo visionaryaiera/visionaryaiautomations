@@ -747,14 +747,46 @@ export default function Landing() {
           <AIShowcase />
         </Section>
 
-        {/* FAQ */}
-        <Section id="faq" eyebrow="08 — Answers" title="Frequently asked" desc="Everything operators ask before signing.">
-
+        {/* Pricing Preview */}
+        <Section id="pricing" eyebrow="08 — Investment" title="Pricing preview" desc="Transparent tiers to scope our first engagement — every plan starts with a free consultation.">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { name: "Starter", price: "₹29k", tag: "Kickoff", perks: ["1 automation or chatbot", "WhatsApp integration", "Basic CRM sync", "2 weeks delivery"] },
+              { name: "Business", price: "₹79k", tag: "Most Popular", perks: ["Up to 3 workflows", "Voice or chat agent", "Full CRM automation", "Dashboards & alerts"], featured: true },
+              { name: "Premium", price: "₹1.99L", tag: "Scale", perks: ["Unlimited workflows", "Multi-channel AI", "Custom integrations", "Priority support"] },
+              { name: "Enterprise", price: "Custom", tag: "Bespoke", perks: ["Dedicated team", "SLAs & security review", "White-glove rollout", "24/7 monitoring"] },
+            ].map((p) => (
+              <div
+                key={p.name}
+                className={`relative flex flex-col rounded-3xl border p-6 ${p.featured ? "border-accent-blue/40 bg-gradient-to-b from-accent-blue/10 to-surface" : "border-white/5 bg-surface"}`}
+              >
+                <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-accent-cyan">{p.tag}</span>
+                <h3 className="mt-3 text-xl font-semibold">{p.name}</h3>
+                <div className="mt-2 text-3xl font-semibold tracking-tight">{p.price}</div>
+                <ul className="mt-6 flex-1 space-y-2 text-sm text-zinc-400">
+                  {p.perks.map((it) => (
+                    <li key={it} className="flex items-start gap-2">
+                      <Check className="mt-0.5 size-4 shrink-0 text-accent-cyan" />
+                      <span>{it}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6">
+                  <WhatsAppButton
+                    serviceKey="general"
+                    source={`pricing-${p.name.toLowerCase()}`}
+                    label="Request Custom Quote"
+                    variant={p.featured ? "primary" : "ghost"}
+                    fullWidth
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </Section>
 
-        {/* Restored FAQ below — placeholder removed */}
-
-
+        {/* FAQ */}
+        <Section id="faq" eyebrow="09 — Answers" title="Frequently asked" desc="Everything operators ask before signing.">
           <div className="mx-auto max-w-3xl rounded-3xl border border-white/5 bg-surface p-2 sm:p-4">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((f, i) => (
