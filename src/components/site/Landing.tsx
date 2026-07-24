@@ -571,8 +571,8 @@ export default function Landing() {
 
         {/* Process */}
         <Section id="process" eyebrow="03 — Method" title="How we work" desc="A calm, seven-step operating rhythm that stays predictable from kickoff to launch.">
-          <ol className="relative grid gap-4 md:grid-cols-7">
-            <div className="pointer-events-none absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-accent-blue/40 via-accent-purple/40 to-accent-cyan/40 md:block" />
+          <ol className="relative grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
+            <div className="pointer-events-none absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-accent-blue/40 via-accent-purple/40 to-accent-cyan/40 lg:block" />
             {process.map((step, i) => (
               <li
                 key={step}
