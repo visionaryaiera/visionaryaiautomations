@@ -34,6 +34,11 @@ import {
   HeartHandshake,
   Church,
   Briefcase,
+  Rocket,
+  Award,
+  Clock,
+  BadgeCheck,
+  Cpu,
 } from "lucide-react";
 import {
   Accordion,
@@ -54,6 +59,7 @@ const nav = [
   { label: "Showcase", href: "#showcase" },
   { label: "Industries", href: "#industries" },
   { label: "Portfolio", href: "#portfolio" },
+  { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
@@ -123,13 +129,14 @@ const whyUs = [
 ];
 
 const process = [
-  "Free Consultation",
-  "Business Analysis",
-  "AI Strategy",
-  "Development",
-  "Testing",
-  "Launch",
-  "Support",
+  "Lead",
+  "WhatsApp",
+  "AI Agent",
+  "CRM",
+  "Follow-up",
+  "Booking",
+  "Payment",
+  "Success",
 ];
 
 const industries = [
@@ -328,9 +335,9 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="mt-8 text-balance text-center text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
             >
-              Transform Your Business With{" "}
+              Automate Your Business.{" "}
               <span className="bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan bg-clip-text text-transparent">
-                AI Automation
+                Accelerate Your Growth.
               </span>
             </motion.h1>
 
@@ -340,8 +347,8 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto mt-6 max-w-[52ch] text-pretty text-center text-base sm:text-lg text-zinc-400"
             >
-              Automate operations. Increase revenue. Reduce costs. Scale faster
-              with enterprise-grade AI agents engineered for the modern era.
+              Helping businesses automate operations with AI, WhatsApp Automation,
+              AI Voice Agents, Chatbots, CRM Automation, and Digital Marketing.
             </motion.p>
 
             <motion.div
@@ -396,6 +403,26 @@ export default function Landing() {
           </motion.div>
         </section>
 
+        {/* Trust Bar */}
+        <section className="mx-auto max-w-6xl px-6 pb-8">
+          <div className="grid grid-cols-2 gap-3 rounded-2xl border border-white/5 bg-surface/60 p-4 sm:grid-cols-5">
+            {[
+              { icon: Award, label: "100+ Projects" },
+              { icon: Rocket, label: "Fast Delivery" },
+              { icon: BadgeCheck, label: "Business Automation" },
+              { icon: Cpu, label: "AI Powered" },
+              { icon: Clock, label: "24/7 Support" },
+            ].map((t) => (
+              <div key={t.label} className="flex items-center gap-2.5 rounded-xl px-3 py-2">
+                <span className="flex size-8 items-center justify-center rounded-lg bg-accent-blue/10 text-accent-cyan">
+                  <t.icon className="size-4" />
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-neutral-200">{t.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Tech marquee */}
         <section className="border-y border-white/5 bg-canvas py-12">
           <p className="mb-8 text-center text-[10px] font-medium uppercase tracking-[0.25em] text-zinc-500">
@@ -443,6 +470,68 @@ export default function Landing() {
 
         {/* Services */}
         <Section id="services" eyebrow="01 — Capabilities" title="Core Intelligence" desc="Specialized AI solutions built to integrate seamlessly into your existing workflows.">
+          {/* Expanded capabilities strip */}
+          <div className="mb-8 rounded-3xl border border-white/5 bg-surface/60 p-5 sm:p-6">
+            <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-zinc-500">
+              Full service stack
+            </p>
+            <div className="mt-4 grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  title: "AI & Automation",
+                  color: "text-accent-blue",
+                  items: [
+                    "AI Automation",
+                    "WhatsApp Automation",
+                    "AI Chatbots",
+                    "AI Voice Agents",
+                    "AI Calling Agents",
+                    "CRM Automation",
+                    "Workflow Automation",
+                    "Lead Generation Systems",
+                    "Business Automation",
+                  ],
+                },
+                {
+                  title: "Web Development",
+                  color: "text-accent-cyan",
+                  items: [
+                    "Website Development",
+                    "Landing Pages",
+                    "E-Commerce Websites",
+                    "WordPress Websites",
+                  ],
+                },
+                {
+                  title: "Performance Marketing",
+                  color: "text-accent-purple",
+                  items: [
+                    "Google Ads",
+                    "Facebook Ads",
+                    "Instagram Ads",
+                    "YouTube Ads",
+                    "Video Ads",
+                    "Voice Over Services",
+                  ],
+                },
+              ].map((g) => (
+                <div key={g.title}>
+                  <h4 className={`text-sm font-semibold ${g.color}`}>{g.title}</h4>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {g.items.map((it) => (
+                      <span
+                        key={it}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-zinc-300"
+                      >
+                        {it}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="grid gap-4">
             {services.map((s, i) => (
               <motion.div
@@ -545,8 +634,8 @@ export default function Landing() {
 
         {/* Process */}
         <Section id="process" eyebrow="03 — Method" title="How we work" desc="A calm, seven-step operating rhythm that stays predictable from kickoff to launch.">
-          <ol className="relative grid gap-4 md:grid-cols-7">
-            <div className="pointer-events-none absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-accent-blue/40 via-accent-purple/40 to-accent-cyan/40 md:block" />
+          <ol className="relative grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
+            <div className="pointer-events-none absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-accent-blue/40 via-accent-purple/40 to-accent-cyan/40 lg:block" />
             {process.map((step, i) => (
               <li
                 key={step}
@@ -658,8 +747,46 @@ export default function Landing() {
           <AIShowcase />
         </Section>
 
+        {/* Pricing Preview */}
+        <Section id="pricing" eyebrow="08 — Investment" title="Pricing preview" desc="Transparent tiers to scope our first engagement — every plan starts with a free consultation.">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { name: "Starter", price: "₹29k", tag: "Kickoff", perks: ["1 automation or chatbot", "WhatsApp integration", "Basic CRM sync", "2 weeks delivery"] },
+              { name: "Business", price: "₹79k", tag: "Most Popular", perks: ["Up to 3 workflows", "Voice or chat agent", "Full CRM automation", "Dashboards & alerts"], featured: true },
+              { name: "Premium", price: "₹1.99L", tag: "Scale", perks: ["Unlimited workflows", "Multi-channel AI", "Custom integrations", "Priority support"] },
+              { name: "Enterprise", price: "Custom", tag: "Bespoke", perks: ["Dedicated team", "SLAs & security review", "White-glove rollout", "24/7 monitoring"] },
+            ].map((p) => (
+              <div
+                key={p.name}
+                className={`relative flex flex-col rounded-3xl border p-6 ${p.featured ? "border-accent-blue/40 bg-gradient-to-b from-accent-blue/10 to-surface" : "border-white/5 bg-surface"}`}
+              >
+                <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-accent-cyan">{p.tag}</span>
+                <h3 className="mt-3 text-xl font-semibold">{p.name}</h3>
+                <div className="mt-2 text-3xl font-semibold tracking-tight">{p.price}</div>
+                <ul className="mt-6 flex-1 space-y-2 text-sm text-zinc-400">
+                  {p.perks.map((it) => (
+                    <li key={it} className="flex items-start gap-2">
+                      <Check className="mt-0.5 size-4 shrink-0 text-accent-cyan" />
+                      <span>{it}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6">
+                  <WhatsAppButton
+                    serviceKey="general"
+                    source={`pricing-${p.name.toLowerCase()}`}
+                    label="Request Custom Quote"
+                    variant={p.featured ? "primary" : "ghost"}
+                    fullWidth
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+
         {/* FAQ */}
-        <Section id="faq" eyebrow="08 — Answers" title="Frequently asked" desc="Everything operators ask before signing.">
+        <Section id="faq" eyebrow="09 — Answers" title="Frequently asked" desc="Everything operators ask before signing.">
           <div className="mx-auto max-w-3xl rounded-3xl border border-white/5 bg-surface p-2 sm:p-4">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((f, i) => (

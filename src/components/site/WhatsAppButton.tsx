@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { MessageCircle, ArrowRight, Phone } from "lucide-react";
 import {
   buildWhatsAppUrl,
   trackWhatsAppClick,
@@ -115,6 +115,16 @@ export function GlobalWhatsAppLayer() {
         <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-full bg-canvas/90 px-3 py-1.5 text-xs font-medium text-neutral-100 backdrop-blur-md ring-1 ring-white/10 sm:group-hover:inline-block">
           Chat with us — replies in minutes
         </span>
+      </a>
+
+      {/* Floating Call button */}
+      <a
+        href="tel:+919491071248"
+        aria-label="Call Visionary AI Automations"
+        onClick={() => trackWhatsAppClick("floating-call", "general")}
+        className="group fixed bottom-24 right-5 z-[60] inline-flex size-12 items-center justify-center rounded-full bg-accent-blue text-white shadow-[0_10px_40px_-5px_rgba(59,130,246,0.6)] transition-transform hover:scale-110"
+      >
+        <Phone className="size-5" />
       </a>
 
       {/* Sticky Book Free Consultation pill */}
