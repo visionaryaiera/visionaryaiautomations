@@ -581,15 +581,19 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative overflow-hidden rounded-3xl border border-white/5 bg-surface p-8 transition-all ${s.border} hover:-translate-y-0.5`}
+                className={`group relative overflow-hidden rounded-3xl border border-white/5 bg-surface p-8 transition-all duration-500 ${s.border} hover:-translate-y-1 hover:shadow-[0_20px_60px_-15px_rgba(37,99,235,0.35)]`}
               >
-                <div className="pointer-events-none absolute -right-16 -top-16 size-52 rounded-full bg-accent-blue/5 blur-3xl transition-opacity group-hover:opacity-100 opacity-0" />
+                {/* Animated gradient glow */}
+                <div className="pointer-events-none absolute -right-20 -top-20 size-64 rounded-full bg-accent-blue/10 blur-3xl transition-all duration-700 opacity-0 group-hover:opacity-100 group-hover:scale-125" />
+                <div className="pointer-events-none absolute -left-20 -bottom-20 size-64 rounded-full bg-accent-purple/10 blur-3xl transition-all duration-700 opacity-0 group-hover:opacity-100" />
+                {/* Animated border sheen */}
+                <div className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%)" }} />
                 <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                   <div className="flex-1">
-                    <div className={`flex size-11 items-center justify-center rounded-xl ${s.bg} ${s.color}`}>
+                    <div className={`flex size-12 items-center justify-center rounded-xl ${s.bg} ${s.color} transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
                       <s.icon className="size-5" />
                     </div>
-                    <h3 className="mt-6 text-xl font-semibold tracking-tight text-neutral-100">
+                    <h3 className="mt-6 text-xl font-semibold tracking-tight text-neutral-100 transition-colors group-hover:text-white">
                       {s.title}
                     </h3>
                     <p className="mt-3 max-w-[56ch] text-sm leading-relaxed text-zinc-400">
@@ -599,7 +603,7 @@ export default function Landing() {
                       {s.tags.map((t) => (
                         <span
                           key={t}
-                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-zinc-300"
+                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-zinc-300 transition-colors group-hover:border-white/20 group-hover:bg-white/10"
                         >
                           {t}
                         </span>
@@ -613,25 +617,24 @@ export default function Landing() {
                           label="Get Free Consultation"
                           variant="primary"
                         />
+                        {getServiceByKey(s.key) ? (
+                          <a
+                            href={`/services/${getServiceByKey(s.key)!.slug}`}
+                            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-100 backdrop-blur-md transition-all hover:border-accent-blue/40 hover:bg-white/10 hover:text-white"
+                          >
+                            Learn More
+                            <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                          </a>
+                        ) : null}
                         <a
                           href={getFormUrl(s.key)}
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => trackFormClick(`service-${s.key}`, s.key)}
-                          className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-100 backdrop-blur-md transition-colors hover:bg-white/10"
+                          className="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3.5 text-sm font-semibold text-zinc-400 transition-colors hover:text-white"
                         >
                           Submit Requirements
-                          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
                         </a>
-                        {getServiceByKey(s.key) ? (
-                          <a
-                            href={`/services/${getServiceByKey(s.key)!.slug}`}
-                            className="group inline-flex items-center justify-center gap-2 rounded-full px-4 py-3.5 text-sm font-semibold text-zinc-300 transition-colors hover:text-white"
-                          >
-                            Explore service
-                            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-                          </a>
-                        ) : null}
                       </div>
                       <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-500">
                         <span className="relative inline-flex size-1.5">
@@ -643,7 +646,7 @@ export default function Landing() {
                     </div>
                   </div>
                   <div className="hidden md:flex shrink-0">
-                    <span className="text-xs font-mono text-zinc-600">
+                    <span className={`font-mono text-3xl font-bold tracking-tight text-transparent transition-all duration-500 group-hover:scale-110`} style={{ WebkitTextStroke: "1px rgba(255,255,255,0.15)" }}>
                       0{i + 1}
                     </span>
                   </div>
