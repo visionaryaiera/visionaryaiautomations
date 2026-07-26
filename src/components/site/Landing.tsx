@@ -46,8 +46,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Toaster } from "sonner";
+import { Toaster, toast } from "sonner";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
+import vaiLogo from "@/assets/vai-logo.asset.json";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { WHATSAPP_DISPLAY, buildWhatsAppUrl, trackWhatsAppClick, type ServiceKey } from "@/lib/whatsapp";
 import { getFormUrl, trackFormClick } from "@/lib/forms";
@@ -140,17 +141,13 @@ const process = [
 ];
 
 const industries = [
-  { icon: Stethoscope, label: "Healthcare" },
-  { icon: Building2, label: "Real Estate" },
-  { icon: GraduationCap, label: "Education" },
-  { icon: UtensilsCrossed, label: "Restaurants" },
-  { icon: Factory, label: "Manufacturing" },
-  { icon: ShoppingBag, label: "Retail" },
-  { icon: Landmark, label: "Finance" },
-  { icon: ShoppingCart, label: "E-commerce" },
-  { icon: HeartHandshake, label: "NGOs" },
-  { icon: Church, label: "Churches" },
-  { icon: Briefcase, label: "Professional Services" },
+  { icon: Stethoscope, label: "Dental Clinics & Hospitals", problem: "Missed calls and no-shows drain revenue.", solution: "AI receptionist books, reminds, and follows up 24/7.", benefit: "Full appointment book, zero missed calls." },
+  { icon: Building2, label: "Real Estate", problem: "Slow lead response kills conversion.", solution: "WhatsApp AI qualifies buyers in seconds.", benefit: "3× site visits, faster closings." },
+  { icon: GraduationCap, label: "Education", problem: "Admissions teams overwhelmed by enquiries.", solution: "Automated funnels handle enquiry → counseling → enrollment.", benefit: "Higher enrollment, lower cost per lead." },
+  { icon: UtensilsCrossed, label: "Restaurants", problem: "Manual bookings and repeat-order chaos.", solution: "WhatsApp bot for reservations, menus, and reorders.", benefit: "More covers, loyal regulars." },
+  { icon: ShoppingBag, label: "Retail Stores", problem: "Walk-ins fluctuate, WhatsApp catalogs go stale.", solution: "AI catalog + reorder assistant on WhatsApp.", benefit: "Higher AOV, sticky customers." },
+  { icon: Briefcase, label: "Service Businesses", problem: "Leads leak between calls, chats, and CRM.", solution: "Unified AI flow captures every enquiry end-to-end.", benefit: "Predictable pipeline, no lost leads." },
+  { icon: ShoppingCart, label: "Local Businesses & SMEs", problem: "Too small to hire a full sales & support team.", solution: "AI runs first-line sales, support, and follow-ups.", benefit: "Enterprise capability at SME cost." },
 ];
 
 const portfolio = [
@@ -216,6 +213,9 @@ export default function Landing() {
   const [scrolled, setScrolled] = useState(0);
   const [showTop, setShowTop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [exitOpen, setExitOpen] = useState(false);
+  const [exitShown, setExitShown] = useState(false);
+  const [lead, setLead] = useState({ name: "", business: "", phone: "", service: "general" as ServiceKey });
 
   useEffect(() => {
     const onScroll = () => {
@@ -229,8 +229,49 @@ export default function Landing() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onLeave = (e: MouseEvent) => {
+      if (exitShown) return;
+      if (e.clientY <= 0) {
+        setExitOpen(true);
+        setExitShown(true);
+      }
+    };
+    document.addEventListener("mouseleave", onLeave);
+    return () => document.removeEventListener("mouseleave", onLeave);
+  }, [exitShown]);
+
+  const submitLead = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!lead.name || !lead.phone) {
+      toast.error("Please add your name and phone.");
+      return;
+    }
+    const msg = `Hello Visionary AI Automations,\n\nI'd like a free consultation.\n\nName: ${lead.name}\nBusiness: ${lead.business}\nPhone: ${lead.phone}\nService: ${lead.service}`;
+    const url = `https://wa.me/919491071248?text=${encodeURIComponent(msg)}`;
+    trackWhatsAppClick("lead-form", lead.service);
+    window.open(url, "_blank", "noopener,noreferrer");
+    toast.success("Opening WhatsApp — we reply within minutes.");
+  };
+
   return (
     <div className="min-h-screen bg-canvas text-neutral-100 font-sans antialiased selection:bg-accent-blue/40">
+      {/* Ambient particles */}
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(37,99,235,0.15),transparent_50%),radial-gradient(circle_at_80%_60%,rgba(56,189,248,0.10),transparent_50%)]" />
+        {Array.from({ length: 24 }).map((_, i) => (
+          <span
+            key={i}
+            className="absolute size-1 rounded-full bg-accent-cyan/60 animate-twinkle"
+            style={{
+              top: `${(i * 37) % 100}%`,
+              left: `${(i * 53) % 100}%`,
+              animationDelay: `${(i % 8) * 0.5}s`,
+            }}
+          />
+        ))}
+      </div>
       {/* Scroll progress */}
       <div className="fixed inset-x-0 top-0 z-[60] h-0.5 bg-transparent">
         <div
@@ -243,7 +284,7 @@ export default function Landing() {
       <nav className="fixed top-2 z-50 w-full px-3 sm:px-4 pt-2">
         <div className="mx-auto flex h-12 max-w-6xl items-center justify-between rounded-full border border-white/10 bg-canvas/70 px-3 sm:px-4 backdrop-blur-xl ring-1 ring-black/5">
           <a href="#top" className="flex items-center gap-2 min-w-0">
-            <span className="inline-block size-6 shrink-0 rounded-full bg-gradient-to-tr from-accent-blue via-accent-purple to-accent-cyan animate-pulse" />
+            <img src={vaiLogo.url} alt="Visionary AI Automations" className="size-7 shrink-0 rounded-md object-cover ring-1 ring-white/10" />
             <span className="text-sm font-semibold tracking-tight truncate">Visionary AI</span>
           </a>
           <div className="hidden md:flex items-center gap-6">
@@ -335,9 +376,9 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="mt-8 text-balance text-center text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
             >
-              Automate Your Business.{" "}
-              <span className="bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan bg-clip-text text-transparent">
-                Accelerate Your Growth.
+              Automate. Scale. Grow.{" "}
+              <span className="bg-gradient-to-r from-accent-blue via-accent-electric to-accent-cyan bg-clip-text text-transparent">
+                AI Solutions That Work 24/7 For Your Business.
               </span>
             </motion.h1>
 
@@ -347,8 +388,8 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto mt-6 max-w-[52ch] text-pretty text-center text-base sm:text-lg text-zinc-400"
             >
-              Helping businesses automate operations with AI, WhatsApp Automation,
-              AI Voice Agents, Chatbots, CRM Automation, and Digital Marketing.
+              Transform customer support, lead generation, appointment booking, and business
+              operations with AI Voice Agents, WhatsApp Automation, and intelligent workflows.
             </motion.p>
 
             <motion.div
