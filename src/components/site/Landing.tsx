@@ -46,8 +46,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Toaster } from "sonner";
+import { Toaster, toast } from "sonner";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
+import vaiLogo from "@/assets/vai-logo.asset.json";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { WHATSAPP_DISPLAY, buildWhatsAppUrl, trackWhatsAppClick, type ServiceKey } from "@/lib/whatsapp";
 import { getFormUrl, trackFormClick } from "@/lib/forms";
@@ -140,17 +141,13 @@ const process = [
 ];
 
 const industries = [
-  { icon: Stethoscope, label: "Healthcare" },
-  { icon: Building2, label: "Real Estate" },
-  { icon: GraduationCap, label: "Education" },
-  { icon: UtensilsCrossed, label: "Restaurants" },
-  { icon: Factory, label: "Manufacturing" },
-  { icon: ShoppingBag, label: "Retail" },
-  { icon: Landmark, label: "Finance" },
-  { icon: ShoppingCart, label: "E-commerce" },
-  { icon: HeartHandshake, label: "NGOs" },
-  { icon: Church, label: "Churches" },
-  { icon: Briefcase, label: "Professional Services" },
+  { icon: Stethoscope, label: "Dental Clinics & Hospitals", problem: "Missed calls and no-shows drain revenue.", solution: "AI receptionist books, reminds, and follows up 24/7.", benefit: "Full appointment book, zero missed calls." },
+  { icon: Building2, label: "Real Estate", problem: "Slow lead response kills conversion.", solution: "WhatsApp AI qualifies buyers in seconds.", benefit: "3× site visits, faster closings." },
+  { icon: GraduationCap, label: "Education", problem: "Admissions teams overwhelmed by enquiries.", solution: "Automated funnels handle enquiry → counseling → enrollment.", benefit: "Higher enrollment, lower cost per lead." },
+  { icon: UtensilsCrossed, label: "Restaurants", problem: "Manual bookings and repeat-order chaos.", solution: "WhatsApp bot for reservations, menus, and reorders.", benefit: "More covers, loyal regulars." },
+  { icon: ShoppingBag, label: "Retail Stores", problem: "Walk-ins fluctuate, WhatsApp catalogs go stale.", solution: "AI catalog + reorder assistant on WhatsApp.", benefit: "Higher AOV, sticky customers." },
+  { icon: Briefcase, label: "Service Businesses", problem: "Leads leak between calls, chats, and CRM.", solution: "Unified AI flow captures every enquiry end-to-end.", benefit: "Predictable pipeline, no lost leads." },
+  { icon: ShoppingCart, label: "Local Businesses & SMEs", problem: "Too small to hire a full sales & support team.", solution: "AI runs first-line sales, support, and follow-ups.", benefit: "Enterprise capability at SME cost." },
 ];
 
 const portfolio = [
@@ -216,6 +213,9 @@ export default function Landing() {
   const [scrolled, setScrolled] = useState(0);
   const [showTop, setShowTop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [exitOpen, setExitOpen] = useState(false);
+  const [exitShown, setExitShown] = useState(false);
+  const [lead, setLead] = useState({ name: "", business: "", phone: "", service: "general" as ServiceKey });
 
   useEffect(() => {
     const onScroll = () => {
@@ -229,8 +229,49 @@ export default function Landing() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onLeave = (e: MouseEvent) => {
+      if (exitShown) return;
+      if (e.clientY <= 0) {
+        setExitOpen(true);
+        setExitShown(true);
+      }
+    };
+    document.addEventListener("mouseleave", onLeave);
+    return () => document.removeEventListener("mouseleave", onLeave);
+  }, [exitShown]);
+
+  const submitLead = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!lead.name || !lead.phone) {
+      toast.error("Please add your name and phone.");
+      return;
+    }
+    const msg = `Hello Visionary AI Automations,\n\nI'd like a free consultation.\n\nName: ${lead.name}\nBusiness: ${lead.business}\nPhone: ${lead.phone}\nService: ${lead.service}`;
+    const url = `https://wa.me/919491071248?text=${encodeURIComponent(msg)}`;
+    trackWhatsAppClick("lead-form", lead.service);
+    window.open(url, "_blank", "noopener,noreferrer");
+    toast.success("Opening WhatsApp — we reply within minutes.");
+  };
+
   return (
     <div className="min-h-screen bg-canvas text-neutral-100 font-sans antialiased selection:bg-accent-blue/40">
+      {/* Ambient particles */}
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(37,99,235,0.15),transparent_50%),radial-gradient(circle_at_80%_60%,rgba(56,189,248,0.10),transparent_50%)]" />
+        {Array.from({ length: 24 }).map((_, i) => (
+          <span
+            key={i}
+            className="absolute size-1 rounded-full bg-accent-cyan/60 animate-twinkle"
+            style={{
+              top: `${(i * 37) % 100}%`,
+              left: `${(i * 53) % 100}%`,
+              animationDelay: `${(i % 8) * 0.5}s`,
+            }}
+          />
+        ))}
+      </div>
       {/* Scroll progress */}
       <div className="fixed inset-x-0 top-0 z-[60] h-0.5 bg-transparent">
         <div
@@ -243,7 +284,7 @@ export default function Landing() {
       <nav className="fixed top-2 z-50 w-full px-3 sm:px-4 pt-2">
         <div className="mx-auto flex h-12 max-w-6xl items-center justify-between rounded-full border border-white/10 bg-canvas/70 px-3 sm:px-4 backdrop-blur-xl ring-1 ring-black/5">
           <a href="#top" className="flex items-center gap-2 min-w-0">
-            <span className="inline-block size-6 shrink-0 rounded-full bg-gradient-to-tr from-accent-blue via-accent-purple to-accent-cyan animate-pulse" />
+            <img src={vaiLogo.url} alt="Visionary AI Automations" className="size-7 shrink-0 rounded-md object-cover ring-1 ring-white/10" />
             <span className="text-sm font-semibold tracking-tight truncate">Visionary AI</span>
           </a>
           <div className="hidden md:flex items-center gap-6">
@@ -335,9 +376,9 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="mt-8 text-balance text-center text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
             >
-              Automate Your Business.{" "}
-              <span className="bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan bg-clip-text text-transparent">
-                Accelerate Your Growth.
+              Automate. Scale. Grow.{" "}
+              <span className="bg-gradient-to-r from-accent-blue via-accent-electric to-accent-cyan bg-clip-text text-transparent">
+                AI Solutions That Work 24/7 For Your Business.
               </span>
             </motion.h1>
 
@@ -347,8 +388,8 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto mt-6 max-w-[52ch] text-pretty text-center text-base sm:text-lg text-zinc-400"
             >
-              Helping businesses automate operations with AI, WhatsApp Automation,
-              AI Voice Agents, Chatbots, CRM Automation, and Digital Marketing.
+              Transform customer support, lead generation, appointment booking, and business
+              operations with AI Voice Agents, WhatsApp Automation, and intelligent workflows.
             </motion.p>
 
             <motion.div
@@ -654,18 +695,30 @@ export default function Landing() {
 
         {/* Industries */}
         <Section id="industries" eyebrow="04 — Verticals" title="Industries we serve" desc="Deep operating context across sectors — from clinics to congregations.">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((it) => (
               <div
                 key={it.label}
-                className="flex items-center gap-3 rounded-2xl border border-white/5 bg-surface p-4 transition-colors hover:border-accent-blue/30"
+                className="group rounded-3xl border border-white/5 bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent-blue/40"
               >
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-white/5 text-accent-blue">
-                  <it.icon className="size-4" />
+                <div className="flex size-11 items-center justify-center rounded-xl bg-accent-blue/10 text-accent-electric">
+                  <it.icon className="size-5" />
                 </div>
-                <span className="text-sm font-medium text-neutral-200">
-                  {it.label}
-                </span>
+                <h3 className="mt-5 text-base font-semibold text-neutral-100">{it.label}</h3>
+                <dl className="mt-4 space-y-3 text-xs">
+                  <div>
+                    <dt className="font-medium uppercase tracking-widest text-red-400/80">Problem</dt>
+                    <dd className="mt-1 text-zinc-400">{it.problem}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium uppercase tracking-widest text-accent-cyan">Solution</dt>
+                    <dd className="mt-1 text-zinc-400">{it.solution}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium uppercase tracking-widest text-emerald-400">Benefit</dt>
+                    <dd className="mt-1 text-zinc-300">{it.benefit}</dd>
+                  </div>
+                </dl>
               </div>
             ))}
           </div>
@@ -903,6 +956,72 @@ export default function Landing() {
 
         {/* Final CTA */}
         <section className="px-6 py-24">
+          {/* Lead capture */}
+          <div className="mx-auto mb-16 max-w-4xl overflow-hidden rounded-3xl border border-accent-blue/20 bg-gradient-to-br from-accent-blue/10 via-surface to-surface p-8 sm:p-12">
+            <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-accent-cyan">Lead Capture</p>
+            <h2 className="mt-3 text-balance text-3xl sm:text-4xl font-semibold tracking-tight">
+              Ready to automate your business?
+            </h2>
+            <p className="mt-3 max-w-[52ch] text-sm text-zinc-400">
+              Share a few details — we'll open WhatsApp with your enquiry pre-filled and reply within minutes.
+            </p>
+            <form onSubmit={submitLead} className="mt-8 grid gap-4 sm:grid-cols-2">
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={lead.name}
+                onChange={(e) => setLead({ ...lead, name: e.target.value })}
+                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-neutral-100 outline-none placeholder:text-zinc-500 focus:border-accent-electric/60"
+                required
+              />
+              <input
+                type="text"
+                placeholder="Business Name"
+                value={lead.business}
+                onChange={(e) => setLead({ ...lead, business: e.target.value })}
+                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-neutral-100 outline-none placeholder:text-zinc-500 focus:border-accent-electric/60"
+              />
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                value={lead.phone}
+                onChange={(e) => setLead({ ...lead, phone: e.target.value })}
+                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-neutral-100 outline-none placeholder:text-zinc-500 focus:border-accent-electric/60"
+                required
+              />
+              <select
+                value={lead.service}
+                onChange={(e) => setLead({ ...lead, service: e.target.value as ServiceKey })}
+                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-neutral-100 outline-none focus:border-accent-electric/60"
+              >
+                <option value="general">Service required…</option>
+                <option value="voice-agent">AI Voice Agent</option>
+                <option value="whatsapp-chatbot">WhatsApp AI Chatbot</option>
+                <option value="ai-automation">AI Automation</option>
+                <option value="website">Business Website / Landing Page</option>
+                <option value="video-ads">AI Video Ads</option>
+              </select>
+              <div className="sm:col-span-2 flex flex-col items-stretch gap-3 sm:flex-row">
+                <button
+                  type="submit"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#20BF5B]"
+                >
+                  <MessageCircle className="size-4" />
+                  Book Free Consultation
+                </button>
+                <a
+                  href={buildWhatsAppUrl("general")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick("lead-form-direct", "general")}
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-100 hover:bg-white/10"
+                >
+                  Chat on WhatsApp
+                </a>
+              </div>
+            </form>
+          </div>
+
           <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900 via-canvas to-canvas p-10 sm:p-16 text-center">
             <div className="pointer-events-none absolute" />
             <h2 className="text-balance text-3xl sm:text-5xl font-semibold tracking-tight">
@@ -929,7 +1048,7 @@ export default function Landing() {
         <div className="mx-auto flex max-w-6xl flex-col gap-12 lg:flex-row lg:justify-between">
           <div className="max-w-xs">
             <div className="flex items-center gap-2">
-              <span className="inline-block size-5 rounded-full bg-gradient-to-tr from-accent-blue via-accent-purple to-accent-cyan" />
+              <img src={vaiLogo.url} alt="Visionary AI Automations" className="size-6 rounded-md object-cover ring-1 ring-white/10" />
               <span className="text-sm font-semibold">Visionary AI Automations</span>
             </div>
             <p className="mt-4 text-sm text-zinc-500">
@@ -986,6 +1105,46 @@ export default function Landing() {
       )}
 
       <Toaster theme="dark" position="top-center" richColors />
+
+      {/* Exit-intent popup */}
+      {exitOpen && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm animate-fade-up">
+          <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-accent-blue/30 bg-surface p-8 shadow-2xl">
+            <button
+              onClick={() => setExitOpen(false)}
+              aria-label="Close"
+              className="absolute right-4 top-4 inline-flex size-8 items-center justify-center rounded-full border border-white/10 text-zinc-400 hover:text-white"
+            >
+              <X className="size-4" />
+            </button>
+            <div className="pointer-events-none absolute -right-16 -top-16 size-52 rounded-full bg-accent-blue/20 blur-3xl" />
+            <div className="relative">
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-accent-cyan">
+                Wait — before you go
+              </span>
+              <h3 className="mt-4 text-2xl font-semibold tracking-tight">Free 30-min AI strategy call</h3>
+              <p className="mt-3 text-sm text-zinc-400">
+                We'll map your top 3 highest-ROI automations — no obligation, no pitch.
+              </p>
+              <div className="mt-6 flex flex-col gap-2">
+                <WhatsAppButton
+                  serviceKey="general"
+                  source="exit-intent"
+                  label="Claim My Free Call"
+                  variant="primary"
+                  fullWidth
+                />
+                <button
+                  onClick={() => setExitOpen(false)}
+                  className="text-xs text-zinc-500 hover:text-zinc-300"
+                >
+                  No thanks, I'll keep browsing
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
