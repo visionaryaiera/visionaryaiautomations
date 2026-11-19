@@ -118,6 +118,8 @@ function RootShell({ children }: { children: ReactNode }) {
       <body>
         {children}
         <Scripts />
+        {/* Vision AI chat widget (served by api.visionaryaiautomations.com) */}
+        <script src="https://api.visionaryaiautomations.com/widget.js" data-bottom="160" data-right="20" defer />
       </body>
     </html>
   );
