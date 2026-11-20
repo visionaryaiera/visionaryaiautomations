@@ -1057,6 +1057,13 @@ export default function Landing() {
             <p className="mt-4 text-sm text-zinc-500">
               Architecting the future of autonomous business operations.
             </p>
+            <address className="mt-4 text-sm not-italic leading-relaxed text-zinc-500">
+              MBD Complex, HMT Nagar, Nacharam,
+              <br />
+              Hyderabad, Telangana 500076
+              <br />
+              <a href="tel:+919491071248" className="hover:text-zinc-300">+91 94910 71248</a>
+            </address>
           </div>
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
             <FooterCol
@@ -1089,7 +1096,7 @@ export default function Landing() {
             © {new Date().getFullYear()} Visionary AI Automations
           </p>
           <div className="flex gap-3 text-[10px] uppercase tracking-widest text-zinc-600">
-            <a href="#" className="hover:text-zinc-300">LinkedIn</a>
+            <a href="https://www.linkedin.com/company/145492277/" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">LinkedIn</a>
             <a href="#" className="hover:text-zinc-300">X</a>
             <a href="#" className="hover:text-zinc-300">YouTube</a>
           </div>
