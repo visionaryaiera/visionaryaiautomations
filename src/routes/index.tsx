@@ -33,8 +33,8 @@ export const Route = createFileRoute("/")({
             {
               "@type": "OpeningHoursSpecification",
               dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-              opens: "09:00",
-              closes: "22:00",
+              opens: "07:00",
+              closes: "19:00",
             },
           ],
           sameAs: ["https://www.linkedin.com/company/145492277/"],
