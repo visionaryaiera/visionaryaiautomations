@@ -214,10 +214,10 @@ function LandingVisual() {
           Get Started →
         </motion.div>
         <div className="mt-4 grid w-full grid-cols-3 gap-2">
-          {["+312%", "9.4×", "0.8s"].map((v) => (
+          {[["24/7", "AI chat"], ["SEO", "ready"], ["Mobile", "first"]].map(([v, l]) => (
             <div key={v} className="rounded-lg border border-white/10 bg-white/[0.02] p-2 text-[10px]">
               <div className="text-accent-cyan">{v}</div>
-              <div className="text-zinc-500">lift</div>
+              <div className="text-zinc-500">{l}</div>
             </div>
           ))}
         </div>
@@ -268,7 +268,7 @@ const SLIDES: Slide[] = [
     service: "whatsapp-chatbot",
     eyebrow: "WhatsApp Chatbots",
     title: "Book, sell, and support — all in WhatsApp.",
-    desc: "Conversational commerce that closes at midnight and speaks 30+ languages.",
+    desc: "Conversational commerce that closes at midnight and speaks Telugu, English & Hindi.",
     icon: Bot,
     accent: "cyan",
     visual: <ChatVisual />,

@@ -47,7 +47,7 @@ export const SERVICES: ServiceMeta[] = [
         "We design custom AI workflows that connect your CRM, WhatsApp, email, calendar, and internal tools — so your team ships work while automation runs the ops.",
     },
     benefits: [
-      { title: "Cut manual work by 70%+", desc: "Automate lead capture, follow-ups, invoicing, and reporting end-to-end." },
+      { title: "Cut hours of manual work", desc: "Automate lead capture, follow-ups, invoicing, and reporting end-to-end." },
       { title: "Zero missed leads", desc: "Every enquiry gets qualified, routed, and answered in seconds — 24/7." },
       { title: "Scale without headcount", desc: "Handle 10x volume without hiring — automation runs your back office." },
       { title: "Real-time visibility", desc: "Dashboards and Slack/WhatsApp alerts so you always know what's happening." },
@@ -76,7 +76,7 @@ export const SERVICES: ServiceMeta[] = [
     faq: [
       { q: "Which tools do you integrate with?", a: "Anything with an API — CRMs, ERPs, Google Workspace, WhatsApp Business, Slack, Notion, Airtable, custom databases, and 400+ SaaS tools via n8n and Make." },
       { q: "How long does a typical build take?", a: "Simple workflows go live in 5–7 days. Multi-system automations take 2–4 weeks. We'll give you an exact timeline after discovery." },
-      { q: "Do you provide ongoing support?", a: "Yes — every deployment includes 30 days of hyper-care and optional monthly retainers for updates, monitoring, and new workflows." },
+      { q: "Do you provide ongoing support?", a: "Yes — the monthly support plan covers updates, monitoring and fixes, and the first 30 days include extra hands-on support." },
     ],
   },
   {
@@ -98,7 +98,7 @@ export const SERVICES: ServiceMeta[] = [
     benefits: [
       { title: "Reply in seconds, 24/7", desc: "Never lose a lead to a slow reply again — your bot answers instantly." },
       { title: "Book appointments end-to-end", desc: "Calendar sync, confirmations, reminders — fully automated." },
-      { title: "Multilingual by default", desc: "Speak Hindi, English, Telugu, Tamil, and more — natively." },
+      { title: "Multilingual by default", desc: "Replies in Telugu, English and Hindi — naturally." },
       { title: "Handoff to humans", desc: "Escalates hot leads and complex issues to your team automatically." },
     ],
     features: [
@@ -108,7 +108,7 @@ export const SERVICES: ServiceMeta[] = [
       "Order tracking & catalog",
       "Lead qualification & CRM sync",
       "Broadcast campaigns",
-      "Multilingual (10+ languages)",
+      "Telugu, English & Hindi replies",
       "Human handoff & analytics",
     ],
     workflow: [
@@ -123,9 +123,9 @@ export const SERVICES: ServiceMeta[] = [
       { value: "10+", label: "Languages supported" },
     ],
     faq: [
-      { q: "Do you use the official WhatsApp Business API?", a: "Yes — every deployment uses the official Cloud API, so your account never gets flagged or banned." },
+      { q: "Do you use the official WhatsApp Business API?", a: "Yes — we use the official WhatsApp Cloud API (approved by Meta), the safe and compliant way to automate WhatsApp." },
       { q: "Can it integrate with my CRM?", a: "Yes — leads and conversations sync to HubSpot, Zoho, Salesforce, Google Sheets, or any custom system." },
-      { q: "How natural is the conversation?", a: "We use GPT-class models fine-tuned on your brand voice. Most users can't tell it apart from a human agent." },
+      { q: "How natural is the conversation?", a: "It is trained on your own services, prices and FAQs, and replies naturally in your customer's language. Your team can take over the chat anytime." },
     ],
   },
   {
@@ -154,7 +154,7 @@ export const SERVICES: ServiceMeta[] = [
       "Inbound reception & IVR replacement",
       "Outbound sales & follow-up calls",
       "Appointment reminders",
-      "Multilingual voice (10+ languages)",
+      "Natural Telugu & English voices",
       "Call recording & transcripts",
       "CRM & calendar integration",
       "Real-time analytics dashboard",
@@ -162,7 +162,7 @@ export const SERVICES: ServiceMeta[] = [
     ],
     workflow: [
       { step: "01", title: "Script design", desc: "We build call flows, objection handling, and handoff rules." },
-      { step: "02", title: "Voice cloning", desc: "Choose from premium voices or clone your brand voice." },
+      { step: "02", title: "Voice & script", desc: "Pick a natural male or female voice and we write the call script with you." },
       { step: "03", title: "Number & routing", desc: "Provisioning, forwarding, and integration with your PBX." },
       { step: "04", title: "Launch & tune", desc: "Weekly reviews of transcripts and continuous optimization." },
     ],
@@ -172,9 +172,9 @@ export const SERVICES: ServiceMeta[] = [
       { value: "5000+", label: "Calls per day capacity" },
     ],
     faq: [
-      { q: "Can the voice sound like a specific person?", a: "Yes — we can clone your brand voice with consent, or pick from a library of premium natural voices." },
-      { q: "What languages are supported?", a: "English, Hindi, Telugu, Tamil, Marathi, Bengali, Gujarati, Kannada, Malayalam, Punjabi and more." },
-      { q: "Does it work with my existing phone number?", a: "Yes — we can route calls from your existing number or provision a new one." },
+      { q: "Can the voice match our brand?", a: "Yes — choose a natural male or female voice in Telugu or English, with your own script, greeting and tone." },
+      { q: "What languages are supported?", a: "Telugu and English today; Hindi and other Indian languages on request." },
+      { q: "Does it work with my existing phone number?", a: "Calls go out from a dedicated business number; we can also set it up to call back missed calls on your existing number." },
     ],
   },
   {
@@ -223,7 +223,7 @@ export const SERVICES: ServiceMeta[] = [
     faq: [
       { q: "What stack do you build on?", a: "Modern React (TanStack Start / Next.js) for premium sites, WordPress or Shopify when appropriate. Always fast, always SEO-friendly." },
       { q: "Do I own the code?", a: "Yes — full source and hosting handover included with every project." },
-      { q: "Do you handle hosting?", a: "We can host on Cloudflare / Vercel with global CDN and SSL, or hand off to your team." },
+      { q: "Do you handle hosting?", a: "Yes — we host it for you with SSL, backups and updates under the monthly care plan, or hand it over to your team." },
     ],
   },
   {
@@ -232,15 +232,15 @@ export const SERVICES: ServiceMeta[] = [
     icon: Video,
     accent: "purple",
     name: "AI Video Ads",
-    tagline: "Cinematic AI video ads that convert on Meta, YouTube, and TikTok.",
+    tagline: "Cinematic AI video ads that convert on Meta, YouTube, and LinkedIn.",
     seoTitle: "AI Video Ad Production — Visionary AI Automations",
     seoDescription:
-      "Cinematic AI-generated video ads for Meta, YouTube, TikTok, and LinkedIn. Multiple variants, scripts, and voiceovers — production-ready in days.",
+      "Cinematic AI-generated video ads for Meta, YouTube, and LinkedIn. Multiple variants, scripts, and voiceovers — production-ready in days.",
     hero: {
       kicker: "AI Video Ads",
       title: "Cinematic ads. Delivered in days. Built to convert.",
       subtitle:
-        "AI-generated video ads with pro scripts, voiceovers, subtitles, and multi-variant testing — for Meta, YouTube, TikTok, and LinkedIn.",
+        "AI-generated video ads with pro scripts, voiceovers, subtitles, and multi-variant testing — for Meta, YouTube, and LinkedIn.",
     },
     benefits: [
       { title: "Cinematic quality", desc: "Studio-grade visuals without the studio price tag." },
@@ -254,7 +254,7 @@ export const SERVICES: ServiceMeta[] = [
       "AI voiceovers (multilingual)",
       "Subtitles & captions",
       "10+ variants per concept",
-      "Meta, YouTube, TikTok, LinkedIn cuts",
+      "Meta, YouTube, LinkedIn cuts",
       "Music & sound design",
       "UGC-style options",
     ],
@@ -272,7 +272,7 @@ export const SERVICES: ServiceMeta[] = [
     faq: [
       { q: "How is this different from stock video?", a: "Every frame is custom-generated for your brand, product, and audience — never generic." },
       { q: "Can you match my brand?", a: "Yes — colors, fonts, tone, spokesperson style, and brand guidelines are all applied." },
-      { q: "Do you also run the ads?", a: "We can — media buying is an optional add-on for Meta, Google, and TikTok ads." },
+      { q: "Do you also run the ads?", a: "We can — running Meta (Facebook & Instagram) and Google ads is an optional add-on." },
     ],
   },
 ];

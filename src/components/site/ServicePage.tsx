@@ -584,7 +584,7 @@ function WebsiteMock() {
 
 function VideoAdsMock() {
   return (
-    <MockShell title="Ad variants — Meta / YouTube / TikTok">
+    <MockShell title="Ad variants — Meta / YouTube / LinkedIn">
       <div className="grid gap-3 sm:grid-cols-3">
         {["9:16", "1:1", "16:9"].map((r, i) => (
           <motion.div

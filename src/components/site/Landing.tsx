@@ -124,7 +124,7 @@ const whyUs = [
   { icon: Zap, title: "Fast Delivery", desc: "Ship in weeks, not quarters." },
   { icon: Sparkles, title: "Premium Design", desc: "Award-worthy craft on every pixel." },
   { icon: Target, title: "Business Focused", desc: "Every build tied to a revenue KPI." },
-  { icon: Lock, title: "Enterprise Security", desc: "SOC2-minded stack, zero shortcuts." },
+  { icon: Lock, title: "Secure by design", desc: "Official WhatsApp API, encrypted data, delete-on-request." },
   { icon: Scaling, title: "Scalable Solutions", desc: "Built to survive 100× growth." },
   { icon: Headset, title: "Dedicated Support", desc: "A team on call, not a ticket queue." },
   { icon: ShieldCheck, title: "Latest AI Tech", desc: "GPT-5, Claude, Gemini — always current." },
@@ -169,36 +169,34 @@ const techStack = [
   "ElevenLabs",
   "Supabase",
   "Firebase",
-  "Vercel",
   "Cloudflare",
-  "Stripe",
   "Razorpay",
 ];
 
 const faqs = [
   {
     q: "How fast can you deliver a project?",
-    a: "Most automations and chatbots ship in 2–4 weeks. Voice agents and full websites take 4–8 weeks depending on scope.",
+    a: "Your free 3-day trial is ready in minutes. WhatsApp AI agents and websites go live in 7–14 days; voice agents and custom workflows in 2–4 weeks.",
   },
   {
-    q: "Do you work with businesses outside the US?",
-    a: "Yes — we serve clients globally with async delivery and a shared Slack channel. Voice agents and chatbots support 30+ languages.",
+    q: "Do you work with businesses outside Hyderabad?",
+    a: "Yes — we work remotely with businesses across India and abroad over WhatsApp and video calls. Our AI replies in Telugu, English and Hindi (other languages on request).",
   },
   {
     q: "Which AI models do you use?",
-    a: "We're model-agnostic. We pick the best fit per task from OpenAI, Anthropic (Claude), Google (Gemini), and open-source models.",
+    a: "We use leading AI models (Google Gemini, Anthropic Claude, OpenAI) and pick the best fit for speed, quality and cost.",
   },
   {
     q: "Do you handle hosting and maintenance?",
-    a: "Yes. Every plan includes hosting on Vercel / Cloudflare and monitoring. Growth and above get priority incident response.",
+    a: "Yes. Hosting, monitoring and updates are included in your monthly support plan. Pro clients get priority support.",
   },
   {
     q: "Is my data secure?",
-    a: "We follow SOC2-aligned practices, encrypt data in transit and at rest, and never train shared models on your customer data.",
+    a: "Your data is encrypted in transit, used only to run your assistant, never sold, and deleted on request (see our privacy policy).",
   },
   {
     q: "Can you integrate with our existing CRM/tools?",
-    a: "Yes — HubSpot, Salesforce, Zoho, Pipedrive, Google Workspace, Slack, and 400+ tools via n8n and native APIs.",
+    a: "Yes — Google Sheets, Zoho, HubSpot, Google Workspace and most tools with an API, via n8n or direct integrations.",
   },
   {
     q: "What if I don't know what to automate yet?",
@@ -206,7 +204,7 @@ const faqs = [
   },
   {
     q: "How do payments work?",
-    a: "Monthly retainer via Stripe or Razorpay. Enterprise engagements support wire and PO terms.",
+    a: "One-time setup paid upfront (UPI or bank transfer), then a small monthly plan, billed monthly or yearly. No lock-in. Invoice provided.",
   },
 ];
 
