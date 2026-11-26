@@ -9,10 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrialRouteImport } from './routes/trial'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as SettingsGithubRouteImport } from './routes/settings.github'
 import { Route as SettingsFormsRouteImport } from './routes/settings.forms'
 import { Route as SettingsAnalyticsRouteImport } from './routes/settings.analytics'
@@ -22,6 +24,11 @@ import { Route as ServicesAiVideoAdsRouteImport } from './routes/services.ai-vid
 import { Route as ServicesAiBusinessWebsiteRouteImport } from './routes/services.ai-business-website'
 import { Route as ServicesAiAutomationRouteImport } from './routes/services.ai-automation'
 
+const TrialRoute = TrialRouteImport.update({
+  id: '/trial',
+  path: '/trial',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ThankYouRoute = ThankYouRouteImport.update({
   id: '/thank-you',
   path: '/thank-you',
@@ -40,6 +47,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsGithubRoute = SettingsGithubRouteImport.update({
@@ -89,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
+  '/trial': typeof TrialRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
   '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
@@ -97,12 +110,14 @@ export interface FileRoutesByFullPath {
   '/settings/analytics': typeof SettingsAnalyticsRoute
   '/settings/forms': typeof SettingsFormsRoute
   '/settings/github': typeof SettingsGithubRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
+  '/trial': typeof TrialRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
   '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
@@ -111,6 +126,7 @@ export interface FileRoutesByTo {
   '/settings/analytics': typeof SettingsAnalyticsRoute
   '/settings/forms': typeof SettingsFormsRoute
   '/settings/github': typeof SettingsGithubRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -118,6 +134,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
+  '/trial': typeof TrialRoute
   '/services/ai-automation': typeof ServicesAiAutomationRoute
   '/services/ai-business-website': typeof ServicesAiBusinessWebsiteRoute
   '/services/ai-video-ads': typeof ServicesAiVideoAdsRoute
@@ -126,6 +143,7 @@ export interface FileRoutesById {
   '/settings/analytics': typeof SettingsAnalyticsRoute
   '/settings/forms': typeof SettingsFormsRoute
   '/settings/github': typeof SettingsGithubRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -134,6 +152,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/terms'
     | '/thank-you'
+    | '/trial'
     | '/services/ai-automation'
     | '/services/ai-business-website'
     | '/services/ai-video-ads'
@@ -142,12 +161,14 @@ export interface FileRouteTypes {
     | '/settings/analytics'
     | '/settings/forms'
     | '/settings/github'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/privacy'
     | '/terms'
     | '/thank-you'
+    | '/trial'
     | '/services/ai-automation'
     | '/services/ai-business-website'
     | '/services/ai-video-ads'
@@ -156,12 +177,14 @@ export interface FileRouteTypes {
     | '/settings/analytics'
     | '/settings/forms'
     | '/settings/github'
+    | '/services'
   id:
     | '__root__'
     | '/'
     | '/privacy'
     | '/terms'
     | '/thank-you'
+    | '/trial'
     | '/services/ai-automation'
     | '/services/ai-business-website'
     | '/services/ai-video-ads'
@@ -170,6 +193,7 @@ export interface FileRouteTypes {
     | '/settings/analytics'
     | '/settings/forms'
     | '/settings/github'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -177,6 +201,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
   ThankYouRoute: typeof ThankYouRoute
+  TrialRoute: typeof TrialRoute
   ServicesAiAutomationRoute: typeof ServicesAiAutomationRoute
   ServicesAiBusinessWebsiteRoute: typeof ServicesAiBusinessWebsiteRoute
   ServicesAiVideoAdsRoute: typeof ServicesAiVideoAdsRoute
@@ -185,10 +210,18 @@ export interface RootRouteChildren {
   SettingsAnalyticsRoute: typeof SettingsAnalyticsRoute
   SettingsFormsRoute: typeof SettingsFormsRoute
   SettingsGithubRoute: typeof SettingsGithubRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trial': {
+      id: '/trial'
+      path: '/trial'
+      fullPath: '/trial'
+      preLoaderRoute: typeof TrialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/thank-you': {
       id: '/thank-you'
       path: '/thank-you'
@@ -215,6 +248,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings/github': {
@@ -281,6 +321,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
   ThankYouRoute: ThankYouRoute,
+  TrialRoute: TrialRoute,
   ServicesAiAutomationRoute: ServicesAiAutomationRoute,
   ServicesAiBusinessWebsiteRoute: ServicesAiBusinessWebsiteRoute,
   ServicesAiVideoAdsRoute: ServicesAiVideoAdsRoute,
@@ -289,7 +330,18 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsAnalyticsRoute: SettingsAnalyticsRoute,
   SettingsFormsRoute: SettingsFormsRoute,
   SettingsGithubRoute: SettingsGithubRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

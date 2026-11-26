@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Check, Minus, Sparkles, ShieldCheck, Gift, Calculator } from "lucide-react";
 import { WhatsAppButton } from "./WhatsAppButton";
 
@@ -215,13 +216,16 @@ export function Pricing() {
                 ))}
               </ul>
               <div className="mt-6">
-                <WhatsAppButton
-                  serviceKey="general"
-                  source={`pricing-${p.name.toLowerCase()}`}
-                  label={p.monthly ? "Start 3-day free trial" : "Talk to us"}
-                  variant={p.featured ? "primary" : "ghost"}
-                  fullWidth
-                />
+                {p.monthly ? (
+                  <Link
+                    to="/trial"
+                    className={`inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition ${p.featured ? "bg-[#25D366] text-white hover:bg-[#20BF5B]" : "border border-white/10 bg-white/5 text-neutral-100 hover:border-[#25D366]/40 hover:bg-white/10"}`}
+                  >
+                    Start 3-day free trial
+                  </Link>
+                ) : (
+                  <WhatsAppButton serviceKey="general" source="pricing-enterprise" label="Talk to us" variant="ghost" fullWidth />
+                )}
               </div>
             </div>
           );
