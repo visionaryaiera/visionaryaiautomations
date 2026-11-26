@@ -1,6 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Code2, CheckCircle2, XCircle, RefreshCw, ExternalLink, GitBranch, Clock } from "lucide-react";
+import {
+  Code2,
+  CheckCircle2,
+  XCircle,
+  RefreshCw,
+  ExternalLink,
+  GitBranch,
+  Clock,
+} from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 
@@ -8,7 +16,10 @@ export const Route = createFileRoute("/settings/github")({
   head: () => ({
     meta: [
       { title: "GitHub Sync — Visionary AI Automations" },
-      { name: "description", content: "Check GitHub repository connection and two-way sync health." },
+      {
+        name: "description",
+        content: "Check GitHub repository connection and two-way sync health.",
+      },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -64,7 +75,9 @@ function GitHubSettings() {
         if (parsed?.owner) setOwner(parsed.owner);
         if (parsed?.repo) setRepo(parsed.repo);
       }
-    } catch {}
+    } catch {
+      // ignore: optional data
+    }
   }, []);
 
   async function check() {
@@ -105,7 +118,9 @@ function GitHubSettings() {
             url: c.html_url,
           };
         }
-      } catch {}
+      } catch {
+        // ignore: optional data
+      }
       setStatus({
         state: "ok",
         fullName: data.full_name,
@@ -127,7 +142,10 @@ function GitHubSettings() {
     <div className="min-h-screen bg-canvas text-neutral-100">
       <Toaster theme="dark" richColors position="top-center" />
       <div className="mx-auto max-w-3xl px-6 py-16">
-        <Link to="/" className="text-xs uppercase tracking-[0.25em] text-accent-cyan hover:text-white">
+        <Link
+          to="/"
+          className="text-xs uppercase tracking-[0.25em] text-accent-cyan hover:text-white"
+        >
           ← Back to site
         </Link>
 
@@ -137,15 +155,18 @@ function GitHubSettings() {
           </span>
           <div>
             <h1 className="text-2xl font-semibold tracking-tight">GitHub sync status</h1>
-            <p className="text-sm text-zinc-400">Check whether your repository is reachable and how recent the last push was.</p>
+            <p className="text-sm text-zinc-400">
+              Check whether your repository is reachable and how recent the last push was.
+            </p>
           </div>
         </div>
 
         <div className="mt-6 rounded-2xl border border-white/5 bg-surface/60 p-4 text-xs text-zinc-400">
           <p>
-            The Lovable ↔ GitHub two-way sync itself is managed by Lovable (chat input <span className="text-neutral-200">+ → GitHub</span>).
-            This screen queries GitHub directly to verify the repo exists and reports how fresh the latest push is — a practical
-            indicator that sync is flowing.
+            The Lovable ↔ GitHub two-way sync itself is managed by Lovable (chat input{" "}
+            <span className="text-neutral-200">+ → GitHub</span>). This screen queries GitHub
+            directly to verify the repo exists and reports how fresh the latest push is — a
+            practical indicator that sync is flowing.
           </p>
         </div>
 
@@ -181,7 +202,8 @@ function GitHubSettings() {
         <div className="mt-6">
           {status.state === "idle" && (
             <div className="rounded-3xl border border-dashed border-white/10 bg-surface/40 p-8 text-center text-sm text-zinc-500">
-              Enter your GitHub owner + repo above and click <span className="text-neutral-300">Check status</span>.
+              Enter your GitHub owner + repo above and click{" "}
+              <span className="text-neutral-300">Check status</span>.
             </div>
           )}
 
@@ -255,7 +277,9 @@ function GitHubSettings() {
 
               {status.lastCommit && (
                 <div className="rounded-3xl border border-white/5 bg-surface p-6">
-                  <div className="text-xs uppercase tracking-[0.25em] text-zinc-500">Latest commit</div>
+                  <div className="text-xs uppercase tracking-[0.25em] text-zinc-500">
+                    Latest commit
+                  </div>
                   <a
                     href={status.lastCommit.url}
                     target="_blank"
@@ -265,7 +289,8 @@ function GitHubSettings() {
                     {status.lastCommit.message}
                   </a>
                   <div className="mt-2 text-xs text-zinc-500">
-                    <span className="font-mono text-zinc-400">{status.lastCommit.sha}</span> · {status.lastCommit.author} · {timeAgo(status.lastCommit.date)}
+                    <span className="font-mono text-zinc-400">{status.lastCommit.sha}</span> ·{" "}
+                    {status.lastCommit.author} · {timeAgo(status.lastCommit.date)}
                   </div>
                 </div>
               )}
@@ -277,7 +302,17 @@ function GitHubSettings() {
   );
 }
 
-function StatCard({ icon, label, value, sub }: { icon: React.ReactNode; label: string; value: string; sub?: string }) {
+function StatCard({
+  icon,
+  label,
+  value,
+  sub,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  sub?: string;
+}) {
   return (
     <div className="rounded-2xl border border-white/5 bg-surface p-4">
       <div className="flex items-center gap-2 text-xs text-zinc-400">
