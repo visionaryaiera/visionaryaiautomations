@@ -39,8 +39,8 @@ export const SERVICE_EXTRAS: Record<string, ServiceExtra> = {
       { value: "3", label: "Languages: Telugu · English · Hindi" },
     ],
     pricing: [
-      { name: "Starter", price: "₹14,999", unit: " setup", note: "(+ ₹2,999/month support & AI usage)", perks: ["WhatsApp AI agent 24/7", "FAQs, prices & menu buttons", "Appointment booking", "Monthly report"] },
-      { name: "Growth", price: "₹34,999", unit: " setup", note: "(+ ₹6,999/month support & AI usage)", featured: true, perks: ["Everything in Starter", "CRM dashboard & lead scoring", "Auto follow-ups", "Instagram + Messenger"] },
+      { name: "Starter", price: "₹14,999", unit: " setup", note: "+ small monthly support & AI usage plan – exact amount in your quotation", perks: ["WhatsApp AI agent 24/7", "FAQs, prices & menu buttons", "Appointment booking", "Monthly report"] },
+      { name: "Growth", price: "₹34,999", unit: " setup", note: "+ small monthly support & AI usage plan – exact amount in your quotation", featured: true, perks: ["Everything in Starter", "CRM dashboard & lead scoring", "Auto follow-ups", "Instagram + Messenger"] },
     ],
   },
   "voice-agent": {
@@ -60,8 +60,8 @@ export const SERVICE_EXTRAS: Record<string, ServiceExtra> = {
       { value: "Telugu", label: "+ English natural voice" },
     ],
     pricing: [
-      { name: "Voice add-on", price: "₹24,999", unit: " setup", note: "(+ ₹7,999/month · 300 call min included)", perks: ["AI voice agent (Telugu / English)", "Calls new leads instantly", "Qualifies & books appointments", "Call summaries to your team"] },
-      { name: "Pro (all-in-one)", price: "₹74,999", unit: " setup", note: "(+ ₹14,999/month · 500 call min included)", featured: true, perks: ["Voice + WhatsApp + CRM", "Sales routing to your team", "Custom integrations", "Priority support"] },
+      { name: "Voice add-on", price: "₹24,999", unit: " setup", note: "+ monthly plan with call minutes – exact amount in your quotation", perks: ["AI voice agent (Telugu / English)", "Calls new leads instantly", "Qualifies & books appointments", "Call summaries to your team"] },
+      { name: "Pro (all-in-one)", price: "₹74,999", unit: " setup", note: "+ monthly plan with call minutes – exact amount in your quotation", featured: true, perks: ["Voice + WhatsApp + CRM", "Sales routing to your team", "Custom integrations", "Priority support"] },
     ],
   },
   "ai-automation": {
@@ -81,7 +81,7 @@ export const SERVICE_EXTRAS: Record<string, ServiceExtra> = {
       { value: "100+", label: "Apps we can connect" },
     ],
     pricing: [
-      { name: "Growth", price: "₹34,999", unit: " setup", note: "(+ ₹6,999/month monitoring & support)", featured: true, perks: ["Up to 3 automated workflows", "CRM & WhatsApp sync", "Dashboards & alerts", "Monitoring & fixes"] },
+      { name: "Growth", price: "₹34,999", unit: " setup", note: "+ small monthly monitoring & support plan – in your quotation", featured: true, perks: ["Up to 3 automated workflows", "CRM & WhatsApp sync", "Dashboards & alerts", "Monitoring & fixes"] },
       { name: "Custom workflow", price: "from ₹19,999", note: "one-time per workflow", perks: ["Scoped to your process", "Sheets, CRM, email, APIs", "Documentation & handover", "Optional maintenance"] },
     ],
   },
@@ -102,8 +102,8 @@ export const SERVICE_EXTRAS: Record<string, ServiceExtra> = {
       { value: "AI chat", label: "Built in, 24/7" },
     ],
     pricing: [
-      { name: "Business website", price: "₹24,999", unit: " one-time", note: "(+ ₹999/month hosting & care)", featured: true, perks: ["Up to 6 pages, mobile-first", "AI chat + WhatsApp button", "Local SEO & Google setup", "Hosting, SSL & updates"] },
-      { name: "Premium website", price: "₹49,999", unit: " one-time", note: "(+ ₹999/month hosting & care)", perks: ["Up to 15 pages + blog", "Booking & lead forms to CRM", "Analytics & ad tracking", "Speed & SEO optimisation"] },
+      { name: "Business website", price: "₹24,999", unit: " one-time", note: "+ small monthly hosting & care plan – in your quotation", featured: true, perks: ["Up to 6 pages, mobile-first", "AI chat + WhatsApp button", "Local SEO & Google setup", "Hosting, SSL & updates"] },
+      { name: "Premium website", price: "₹49,999", unit: " one-time", note: "+ small monthly hosting & care plan – in your quotation", perks: ["Up to 15 pages + blog", "Booking & lead forms to CRM", "Analytics & ad tracking", "Speed & SEO optimisation"] },
     ],
   },
   "ai-video-ads": {

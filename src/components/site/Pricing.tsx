@@ -156,22 +156,9 @@ function Roi() {
 }
 
 export function Pricing() {
-  const [annual, setAnnual] = useState(false);
   return (
     <div>
       <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-1 text-sm">
-          {["Monthly", "Annual"].map((l, i) => (
-            <button
-              key={l}
-              onClick={() => setAnnual(i === 1)}
-              className={`rounded-full px-5 py-2 transition ${annual === (i === 1) ? "bg-neutral-100 text-canvas" : "text-zinc-400"}`}
-            >
-              {l}
-              {i === 1 && <span className="ml-2 text-xs text-[#25D366]">2 months free</span>}
-            </button>
-          ))}
-        </div>
         <div className="flex items-center gap-2 rounded-2xl border border-[#25D366]/30 bg-[#25D366]/10 px-4 py-2 text-sm text-[#25D366]">
           <Gift className="size-4 shrink-0" />
           Founding offer: 50% off setup for our first 10 clients
@@ -180,7 +167,7 @@ export function Pricing() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {PLANS.map((p) => {
-          const monthly = p.monthly && (annual ? (p.monthly * 10) / 12 : p.monthly);
+          const monthly = p.monthly;
           return (
             <div
               key={p.name}
@@ -201,7 +188,8 @@ export function Pricing() {
                     <span className="text-sm font-normal text-zinc-400"> one-time setup</span>
                   </div>
                   <p className="mt-1 text-sm text-zinc-300">
-                    (+ {inr(monthly)}/month support &amp; AI usage{annual && ", billed yearly"})
+                    + small monthly support &amp; AI usage plan
+                    <span className="block text-xs text-zinc-500">Exact amount in your personalised quotation</span>
                   </p>
                   <p className="mt-1 text-xs text-[#25D366]">Founding offer: {inr(p.setup! / 2)} setup</p>
                 </>

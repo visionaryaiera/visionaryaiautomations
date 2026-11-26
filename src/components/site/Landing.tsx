@@ -793,7 +793,7 @@ export default function Landing() {
         </Section>
 
         {/* Pricing Preview */}
-        <Section id="pricing" eyebrow="08 — Investment" title="Simple, transparent pricing" desc="Pay a one-time setup, then a small monthly fee for support and AI usage. Every plan starts with a 3-day free trial.">
+        <Section id="pricing" eyebrow="08 — Investment" title="Simple, transparent pricing" desc="One-time setup price shown upfront. A small monthly support & AI usage plan is tailored to your business and shared in your personalised quotation. Every plan starts with a 3-day free trial.">
           <Pricing />
         </Section>
 
