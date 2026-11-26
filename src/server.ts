@@ -46,6 +46,13 @@ function isH3SwallowedErrorBody(body: string): boolean {
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    // One canonical host for SEO: visionaryaiautomations.com -> www.visionaryaiautomations.com (301)
+    const url = new URL(request.url);
+    if (url.hostname === "visionaryaiautomations.com") {
+      url.hostname = "www.visionaryaiautomations.com";
+      url.protocol = "https:";
+      return Response.redirect(url.toString(), 301);
+    }
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
