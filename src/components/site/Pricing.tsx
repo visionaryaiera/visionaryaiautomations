@@ -197,12 +197,13 @@ export function Pricing() {
               {monthly ? (
                 <>
                   <div className="mt-4 text-3xl font-semibold tracking-tight">
-                    {inr(monthly)}
-                    <span className="text-sm font-normal text-zinc-400">/month</span>
+                    {inr(p.setup!)}
+                    <span className="text-sm font-normal text-zinc-400"> one-time setup</span>
                   </div>
-                  <p className="mt-1 text-xs text-zinc-400">
-                    + {inr(p.setup!)} one-time setup{annual && " · billed yearly"}
+                  <p className="mt-1 text-sm text-zinc-300">
+                    (+ {inr(monthly)}/month support &amp; AI usage{annual && ", billed yearly"})
                   </p>
+                  <p className="mt-1 text-xs text-[#25D366]">Founding offer: {inr(p.setup! / 2)} setup</p>
                 </>
               ) : (
                 <div className="mt-4 text-3xl font-semibold tracking-tight">Custom</div>
