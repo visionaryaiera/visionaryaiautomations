@@ -48,7 +48,6 @@ import {
 } from "@/components/ui/accordion";
 import { Toaster, toast } from "sonner";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
-import vaiLogo from "@/assets/vai-logo.asset.json";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { WHATSAPP_DISPLAY, buildWhatsAppUrl, trackWhatsAppClick, type ServiceKey } from "@/lib/whatsapp";
 import { getFormUrl, trackFormClick } from "@/lib/forms";
@@ -60,8 +59,9 @@ const nav = [
   { label: "Services", href: "#services" },
   { label: "Showcase", href: "#showcase" },
   { label: "Industries", href: "#industries" },
-  { label: "Portfolio", href: "#portfolio" },
+  { label: "Use cases", href: "#portfolio" },
   { label: "Pricing", href: "#pricing" },
+  { label: "Free Trial", href: "/trial" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
@@ -152,12 +152,12 @@ const industries = [
 ];
 
 const portfolio = [
-  { tag: "Automation", title: "Real estate lead router", metric: "+312% qualified leads" },
-  { tag: "Voice Agent", title: "Clinic AI receptionist", metric: "24/7 · 0 missed calls" },
-  { tag: "Chatbot", title: "Restaurant booking bot", metric: "18k bookings/mo" },
-  { tag: "Website", title: "SaaS launch site", metric: "4.2s → 0.8s LCP" },
-  { tag: "Video Ad", title: "CGI product commercial", metric: "9.4× ROAS" },
-  { tag: "Before / After", title: "Manufacturing ops rebuild", metric: "−67% manual hours" },
+  { tag: "Clinic", title: "AI front desk on WhatsApp", metric: "Answers fees & timings, books appointments, sends reminders" },
+  { tag: "Real estate", title: "Lead qualifier for Meta ads", metric: "Asks budget, BHK & timeline; books site visits; routes hot buyers" },
+  { tag: "Coaching", title: "Admissions assistant", metric: "Course & fee answers, demo-class booking, parent follow-ups" },
+  { tag: "Voice agent", title: "Instant lead call-back", metric: "Calls new leads in under 2 minutes in Telugu or English" },
+  { tag: "Website", title: "Mobile-first site with AI chat", metric: "Local SEO, WhatsApp button, enquiries straight to CRM" },
+  { tag: "Video ads", title: "Telugu AI video ads", metric: "Reels & Shorts variants for A/B testing, delivered in 5 days" },
 ];
 
 const techStack = [
@@ -285,7 +285,7 @@ export default function Landing() {
       <nav className="fixed top-2 z-50 w-full px-3 sm:px-4 pt-2">
         <div className="mx-auto flex h-12 max-w-6xl items-center justify-between rounded-full border border-white/10 bg-canvas/70 px-3 sm:px-4 backdrop-blur-xl ring-1 ring-black/5">
           <a href="#top" className="flex items-center gap-2 min-w-0">
-            <img src={vaiLogo.url} alt="Visionary AI Automations" className="size-7 shrink-0 rounded-md object-cover ring-1 ring-white/10" />
+            <img src="/logo.png" alt="Visionary AI Automations" className="size-7 shrink-0 rounded-md object-cover ring-1 ring-white/10" />
             <span className="text-sm font-semibold tracking-tight truncate">Visionary AI</span>
           </a>
           <div className="hidden md:flex items-center gap-6">
@@ -299,16 +299,13 @@ export default function Landing() {
               </a>
             ))}
           </div>
-          <a
-            href={buildWhatsAppUrl("general")}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackWhatsAppClick("nav", "general")}
+          <Link
+            to="/trial"
             className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-4 py-1.5 text-xs font-semibold text-white ring-1 ring-[#25D366]/60 transition-transform hover:scale-[1.02] active:scale-95"
           >
             <MessageCircle className="size-3" />
-            Book Free Consultation
-          </a>
+            Free 3-day trial
+          </Link>
           <button
             className="md:hidden inline-flex size-9 items-center justify-center rounded-full border border-white/10"
             onClick={() => setMenuOpen((v) => !v)}
@@ -367,7 +364,7 @@ export default function Landing() {
                   <span className="absolute inset-0 animate-ping rounded-full bg-accent-cyan opacity-75" />
                   <span className="relative inline-block size-1.5 rounded-full bg-accent-cyan" />
                 </span>
-                Intelligence, Refined
+                Hyderabad · Telugu · English · Hindi
               </span>
             </motion.div>
 
@@ -389,8 +386,8 @@ export default function Landing() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto mt-6 max-w-[52ch] text-pretty text-center text-base sm:text-lg text-zinc-400"
             >
-              Transform customer support, lead generation, appointment booking, and business
-              operations with AI Voice Agents, WhatsApp Automation, and intelligent workflows.
+              Your AI assistant replies to every WhatsApp, Instagram and website enquiry in seconds,
+              books appointments and follows up — day and night. Try it free for 3 days, trained on your business.
             </motion.p>
 
             <motion.div
@@ -400,17 +397,23 @@ export default function Landing() {
               className="mt-10 flex flex-col items-center gap-4"
             >
               <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
+                <Link
+                  to="/trial"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-[#25D366]/60 transition hover:bg-[#20BF5B] sm:w-auto"
+                >
+                  Start 3-day free trial
+                </Link>
                 <WhatsAppButton
                   serviceKey="general"
                   source="hero-primary"
-                  label="Book Free Consultation"
-                  variant="primary"
+                  label="Chat on WhatsApp"
+                  variant="ghost"
                 />
                 <a
-                  href="#services"
+                  href="#pricing"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-200 backdrop-blur-md transition-colors hover:bg-white/10 sm:w-auto"
                 >
-                  View Services
+                  See pricing
                 </a>
               </div>
               <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-500">
@@ -490,10 +493,10 @@ export default function Landing() {
         <section className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { v: "120+", l: "Enterprises served" },
-              { v: "48k", l: "Hours automated / mo" },
-              { v: "$14M+", l: "Client revenue lifted" },
-              { v: "99.98%", l: "Uptime across builds" },
+              { v: "~1.3s", l: "Average AI reply time" },
+              { v: "24/7", l: "Always answering" },
+              { v: "3", l: "Languages: Telugu · English · Hindi" },
+              { v: "3 days", l: "Free trial, no card" },
             ].map((s) => (
               <div
                 key={s.l}
@@ -729,7 +732,7 @@ export default function Landing() {
         </Section>
 
         {/* Portfolio */}
-        <Section id="portfolio" eyebrow="05 — Selected Work" title="Recent deployments" desc="A small slice of the systems we've shipped in the last twelve months.">
+        <Section id="portfolio" eyebrow="05 — Use cases" title="What we build" desc="Example setups for common businesses. Try any of them free for 3 days with your own details.">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {portfolio.map((p) => (
               <div
@@ -756,41 +759,24 @@ export default function Landing() {
           </div>
         </Section>
 
-        {/* Testimonials */}
-        <Section eyebrow="06 — Trust" title="What clients say" desc="Operators shipping revenue with Visionary systems.">
+        {/* Founding clients (no invented testimonials) */}
+        <Section eyebrow="06 — Founding clients" title="Be one of our first 10 clients" desc="We're a new Hyderabad studio. Instead of stock testimonials, here's our promise to early clients.">
           <div className="grid gap-4 md:grid-cols-3">
             {[
-              {
-                q: "Their voice agent replaced three receptionists in a month. Booking rate is up 41%.",
-                n: "Dr. Amara Okafor",
-                r: "Founder, Meridian Health",
-              },
-              {
-                q: "We stopped losing WhatsApp leads overnight. It felt like hiring a whole team.",
-                n: "Rohan Mehta",
-                r: "COO, Sundara Realty",
-              },
-              {
-                q: "The video ad they built for our launch outperformed our agency's work 6:1.",
-                n: "Lena Petrova",
-                r: "CMO, Northline Foods",
-              },
-            ].map((t) => (
-              <figure
-                key={t.n}
-                className="rounded-2xl border border-white/5 bg-surface p-6"
-              >
-                <blockquote className="text-sm leading-relaxed text-neutral-200">
-                  "{t.q}"
-                </blockquote>
-                <figcaption className="mt-6 border-t border-white/5 pt-4">
-                  <div className="text-sm font-medium text-neutral-100">
-                    {t.n}
-                  </div>
-                  <div className="text-xs text-zinc-500">{t.r}</div>
-                </figcaption>
-              </figure>
+              { t: "50% off setup", d: "Founding clients pay half the setup fee on any plan." },
+              { t: "Try before you pay", d: "3-day free trial on our demo number, trained on your business." },
+              { t: "30-day results guarantee", d: "Faster replies to your customers, or your first month is refunded." },
+            ].map((x) => (
+              <div key={x.t} className="rounded-3xl border border-white/5 bg-surface p-6">
+                <Check className="size-5 text-[#25D366]" />
+                <div className="mt-3 text-lg font-semibold text-neutral-100">{x.t}</div>
+                <p className="mt-2 text-sm text-zinc-400">{x.d}</p>
+              </div>
             ))}
+          </div>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link to="/trial" className="inline-flex items-center justify-center rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white hover:bg-[#20BF5B]">Start free trial</Link>
+            <a href="https://g.page/r/CU7YSR-bsjUJEBM/review" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-100 hover:bg-white/10">Read / leave a Google review</a>
           </div>
         </Section>
 
@@ -894,8 +880,8 @@ export default function Landing() {
               {[
                 { icon: MessageCircle, label: "WhatsApp", value: WHATSAPP_DISPLAY, href: buildWhatsAppUrl("general"), track: "contact-tile-whatsapp" },
                 { icon: PhoneIcon, label: "Phone", value: WHATSAPP_DISPLAY, href: "tel:+919491071248", track: "contact-tile-phone" },
-                { icon: Mail, label: "Email", value: "hello@visionary-ai.co", href: "mailto:hello@visionary-ai.co", track: "contact-tile-email" },
-                { icon: MapPin, label: "Availability", value: "Mon–Sat · Replies in minutes", href: buildWhatsAppUrl("general"), track: "contact-tile-availability" },
+                { icon: MapPin, label: "Office", value: "MBD Complex, HMT Nagar, Nacharam, Hyderabad", href: "https://g.page/r/CU7YSR-bsjUJEBM", track: "contact-tile-office" },
+                { icon: MessageCircle, label: "Availability", value: "AI 24/7 · Team Mon–Sat 7 AM–7 PM", href: buildWhatsAppUrl("general"), track: "contact-tile-availability" },
               ].map((c) => (
                 <a
                   key={c.label}
@@ -999,7 +985,7 @@ export default function Landing() {
               Ready to automate?
             </h2>
             <p className="mx-auto mt-6 max-w-[46ch] text-pretty text-zinc-400">
-              Join 120+ industry leaders redefining operations with Visionary AI.
+              Try your own AI assistant free for 3 days — trained on your business in minutes.
             </p>
             <div className="mt-10 flex flex-col items-center gap-3">
               <WhatsAppButton
@@ -1019,7 +1005,7 @@ export default function Landing() {
         <div className="mx-auto flex max-w-6xl flex-col gap-12 lg:flex-row lg:justify-between">
           <div className="max-w-xs">
             <div className="flex items-center gap-2">
-              <img src={vaiLogo.url} alt="Visionary AI Automations" className="size-6 rounded-md object-cover ring-1 ring-white/10" />
+              <img src="/logo.png" alt="Visionary AI Automations" className="size-6 rounded-md object-cover ring-1 ring-white/10" />
               <span className="text-sm font-semibold">Visionary AI Automations</span>
             </div>
             <p className="mt-4 text-sm text-zinc-500">

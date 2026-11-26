@@ -32,7 +32,7 @@ function Terms() {
           <h2 className="text-lg font-semibold text-white">Liability</h2>
           <p>Services are provided as-is. Liability is limited to fees paid in the prior three months, except where prohibited by law.</p>
           <h2 className="text-lg font-semibold text-white">Contact</h2>
-          <p>Questions? Email hello@visionary-ai.co.</p>
+          <p>Questions? WhatsApp us at +91 94910 71248.</p>
         </div>
       </div>
     </main>

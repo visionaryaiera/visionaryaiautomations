@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowLeft, Check, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, AlertTriangle, Building2, Sparkles } from "lucide-react";
+import { SERVICE_EXTRAS } from "@/lib/serviceExtras";
 import {
   Accordion,
   AccordionContent,
@@ -50,6 +51,8 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
   const accent = accentClasses[service.accent] ?? accentClasses.blue;
   const Icon = service.icon;
   const formUrl = getFormUrl(service.key);
+  const extra = SERVICE_EXTRAS[service.slug];
+  const facts = extra?.facts ?? service.results;
 
   useEffect(() => {
     trackServiceView(service.slug);
@@ -58,11 +61,17 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
   const ctaRow = (
     <div className="flex flex-col items-start gap-3">
       <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+        <Link
+          to="/trial"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-[#25D366]/60 transition hover:bg-[#20BF5B]"
+        >
+          <Sparkles className="size-3.5" /> Start 3-day free trial
+        </Link>
         <WhatsAppButton
           serviceKey={service.key}
           source={`service-page-${service.slug}`}
-          label="Book Free Consultation"
-          variant="primary"
+          label="Chat on WhatsApp"
+          variant="ghost"
         />
         <a
           href={formUrl}
@@ -71,7 +80,7 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
           onClick={() => trackFormClick(`service-page-${service.slug}`, service.key)}
           className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-neutral-100 backdrop-blur-md transition-colors hover:bg-white/10"
         >
-          Submit Requirements
+          Send requirements
           <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
         </a>
       </div>
@@ -94,9 +103,7 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
             to="/"
             className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-200 hover:text-white"
           >
-            <span className="inline-flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-accent-blue to-accent-purple">
-              <Sparkles className="size-3.5 text-white" />
-            </span>
+            <img src="/logo.png" alt="Visionary AI Automations" className="size-7 rounded-md object-cover ring-1 ring-white/10" />
             Visionary AI
           </Link>
           <Link
@@ -147,7 +154,7 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
       {/* Results strip */}
       <section className="border-y border-white/5 bg-surface/40">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 py-10 sm:grid-cols-3">
-          {service.results.map((r) => (
+          {facts.map((r) => (
             <div key={r.label} className="text-center sm:text-left">
               <div className={`text-3xl font-semibold ${accent.text} sm:text-4xl`}>{r.value}</div>
               <div className="mt-1 text-xs uppercase tracking-widest text-zinc-500">{r.label}</div>
@@ -155,6 +162,25 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
           ))}
         </div>
       </section>
+
+      {/* The problem */}
+      {extra && (
+        <section className="mx-auto max-w-6xl px-6 pt-20">
+          <div className="max-w-2xl">
+            <div className="text-xs uppercase tracking-widest text-zinc-500">The problem</div>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Sound familiar?</h2>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {extra.problems.map((p) => (
+              <div key={p.title} className="rounded-2xl border border-rose-500/15 bg-rose-500/5 p-6">
+                <AlertTriangle className="size-5 text-rose-400" />
+                <div className="mt-3 text-base font-semibold text-white">{p.title}</div>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* How it works */}
       <section className="mx-auto max-w-6xl px-6 py-20">
@@ -164,7 +190,7 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
             From brief to live in weeks.
           </h2>
           <p className="mt-3 text-sm text-zinc-400">
-            A proven, low-risk delivery process refined across dozens of deployments.
+            A clear, low-risk process: try it free first, go live only when you're happy.
           </p>
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -223,6 +249,54 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
         </div>
       </section>
 
+      {extra && (
+        <>
+          {/* Who it's for */}
+          <section className="mx-auto max-w-6xl px-6 pb-20">
+            <div className="text-xs uppercase tracking-widest text-zinc-500">Who it's for</div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {extra.industries.map((i) => (
+                <span key={i} className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200">
+                  <Building2 className={`size-3.5 ${accent.text}`} /> {i}
+                </span>
+              ))}
+            </div>
+          </section>
+
+          {/* Pricing */}
+          <section id="pricing" className="mx-auto max-w-6xl px-6 pb-20 scroll-mt-24">
+            <div className="max-w-2xl">
+              <div className="text-xs uppercase tracking-widest text-zinc-500">Pricing</div>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Simple, transparent pricing.</h2>
+              <p className="mt-3 text-sm text-zinc-400">Founding offer: 50% off setup for our first 10 clients. No lock-in.</p>
+            </div>
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
+              {extra.pricing.map((p) => (
+                <div key={p.name} className={`flex flex-col rounded-3xl border p-6 ${p.featured ? "border-accent-blue/40 bg-gradient-to-b from-accent-blue/10 to-surface" : "border-white/5 bg-surface"}`}>
+                  <div className="text-lg font-semibold text-white">{p.name}</div>
+                  <div className="mt-3 text-3xl font-semibold tracking-tight">
+                    {p.price}
+                    {p.unit && <span className="text-sm font-normal text-zinc-400">{p.unit}</span>}
+                  </div>
+                  {p.note && <div className="mt-1 text-xs text-zinc-400">{p.note}</div>}
+                  <ul className="mt-6 flex-1 space-y-2 text-sm text-zinc-300">
+                    {p.perks.map((x) => (
+                      <li key={x} className="flex items-start gap-2"><Check className={`mt-0.5 size-4 shrink-0 ${accent.text}`} />{x}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-6">
+                    <WhatsAppButton serviceKey={service.key} source={`service-pricing-${service.slug}`} label={`Get ${p.name}`} variant={p.featured ? "primary" : "ghost"} fullWidth />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-xs text-zinc-500">
+              Compare all plans on the <Link to="/" hash="pricing" className="underline">pricing page</Link>. Meta WhatsApp & call charges billed at cost.
+            </p>
+          </section>
+        </>
+      )}
+
       {/* FAQ */}
       <section className="mx-auto max-w-3xl px-6 pb-20">
         <div className="text-center">
@@ -255,7 +329,7 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
             Ready to launch your {service.name.toLowerCase()}?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-zinc-400 sm:text-base">
-            Chat with us on WhatsApp or send your requirements — we'll reply within minutes.
+            Try it free for 3 days, trained on your own business — or chat with us on WhatsApp.
           </p>
           <div className="mt-8 flex justify-center">{ctaRow}</div>
         </div>
