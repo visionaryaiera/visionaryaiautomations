@@ -15,7 +15,9 @@ export const Route = createFileRoute("/services/voice-agent")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: service.seoTitle },
       { name: "twitter:description", content: service.seoDescription },
+      { property: "og:url", content: "https://www.visionaryaiautomations.com/services/voice-agent" },
     ],
+    links: [{ rel: "canonical", href: "https://www.visionaryaiautomations.com/services/voice-agent" }],
   }),
   component: () => <ServicePage service={service} />,
 });

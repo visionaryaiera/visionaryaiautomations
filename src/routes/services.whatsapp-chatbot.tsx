@@ -15,7 +15,9 @@ export const Route = createFileRoute("/services/whatsapp-chatbot")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: service.seoTitle },
       { name: "twitter:description", content: service.seoDescription },
+      { property: "og:url", content: "https://www.visionaryaiautomations.com/services/whatsapp-chatbot" },
     ],
+    links: [{ rel: "canonical", href: "https://www.visionaryaiautomations.com/services/whatsapp-chatbot" }],
   }),
   component: () => <ServicePage service={service} />,
 });

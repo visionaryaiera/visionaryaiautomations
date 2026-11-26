@@ -441,6 +441,8 @@ export default function Landing() {
                   alt="Visionary AI automation dashboard preview"
                   width={1600}
                   height={1000}
+                  decoding="async"
+                  fetchPriority="high"
                   className="w-full"
                 />
               </div>

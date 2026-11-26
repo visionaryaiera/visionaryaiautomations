@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowLeft, Check, AlertTriangle, Building2, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, X, AlertTriangle, Building2, Sparkles } from "lucide-react";
 import { SERVICE_EXTRAS } from "@/lib/serviceExtras";
 import {
   Accordion,
@@ -180,6 +180,73 @@ export function ServicePage({ service }: { service: ServiceMeta }) {
             ))}
           </div>
         </section>
+      )}
+
+      {extra && (
+        <>
+          {/* Before / After */}
+          <section className="mx-auto max-w-6xl px-6 pt-20">
+            <div className="max-w-2xl">
+              <div className="text-xs uppercase tracking-widest text-zinc-500">Before &amp; after</div>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">What changes for your business.</h2>
+            </div>
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
+              <div className="rounded-3xl border border-white/5 bg-surface p-6">
+                <div className="text-sm font-semibold uppercase tracking-widest text-rose-400">Before</div>
+                <ul className="mt-4 space-y-3">
+                  {extra.before.map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-sm text-zinc-400"><X className="mt-0.5 size-4 shrink-0 text-rose-400" />{b}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-3xl border border-[#25D366]/30 bg-[#25D366]/5 p-6">
+                <div className="text-sm font-semibold uppercase tracking-widest text-[#25D366]">After</div>
+                <ul className="mt-4 space-y-3">
+                  {extra.after.map((a) => (
+                    <li key={a} className="flex items-start gap-3 text-sm text-zinc-200"><Check className="mt-0.5 size-4 shrink-0 text-[#25D366]" />{a}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* Step by step */}
+          <section className="mx-auto max-w-6xl px-6 pt-20">
+            <div className="max-w-2xl">
+              <div className="text-xs uppercase tracking-widest text-zinc-500">Step by step</div>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">What happens for every customer.</h2>
+            </div>
+            <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {extra.journey.map((j, i) => (
+                <li key={j.title} className="relative rounded-2xl border border-white/5 bg-surface p-6">
+                  <div className={`flex size-9 items-center justify-center rounded-full ${accent.bg} ${accent.text} text-sm font-bold`}>{i + 1}</div>
+                  <div className="mt-4 text-base font-semibold text-white">{j.title}</div>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">{j.desc}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          {/* Showcase */}
+          <section className="mx-auto max-w-6xl px-6 pt-20">
+            <div className="max-w-2xl">
+              <div className="text-xs uppercase tracking-widest text-zinc-500">Showcase</div>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">See what you get.</h2>
+              <p className="mt-3 text-sm text-zinc-400">Sample screens with demo data. Your version uses your own business details.</p>
+            </div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {extra.shots.map((sh) => (
+                <figure key={sh.src} className="overflow-hidden rounded-3xl border border-white/10 bg-surface">
+                  <img src={sh.src} alt={sh.title} width={1200} height={750} loading="lazy" decoding="async" className="w-full" />
+                  <figcaption className="p-5">
+                    <div className="text-base font-semibold text-white">{sh.title}</div>
+                    <p className="mt-1 text-sm text-zinc-400">{sh.desc}</p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        </>
       )}
 
       {/* How it works */}

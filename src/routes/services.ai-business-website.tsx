@@ -15,7 +15,9 @@ export const Route = createFileRoute("/services/ai-business-website")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: service.seoTitle },
       { name: "twitter:description", content: service.seoDescription },
+      { property: "og:url", content: "https://www.visionaryaiautomations.com/services/ai-business-website" },
     ],
+    links: [{ rel: "canonical", href: "https://www.visionaryaiautomations.com/services/ai-business-website" }],
   }),
   component: () => <ServicePage service={service} />,
 });

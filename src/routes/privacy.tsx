@@ -7,9 +7,9 @@ export const Route = createFileRoute("/privacy")({
       { name: "description", content: "How Visionary AI Automations collects, uses, protects and deletes your data, including WhatsApp, Messenger and Instagram conversations." },
       { property: "og:title", content: "Privacy Policy — Visionary AI Automations" },
       { property: "og:description", content: "How Visionary AI Automations collects, uses, protects and deletes your data." },
-      { property: "og:url", content: "/privacy" },
+      { property: "og:url", content: "https://www.visionaryaiautomations.com/privacy" },
     ],
-    links: [{ rel: "canonical", href: "/privacy" }],
+    links: [{ rel: "canonical", href: "https://www.visionaryaiautomations.com/privacy" }],
   }),
   component: Privacy,
 });

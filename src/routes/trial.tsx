@@ -13,6 +13,7 @@ export const Route = createFileRoute("/trial")({
         content: "Try a WhatsApp AI assistant trained on your own business for 3 days, free. Replies in Telugu, English & Hindi, books appointments, 24/7.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://www.visionaryaiautomations.com/trial" }],
   }),
   component: TrialPage,
 });

@@ -7,9 +7,9 @@ export const Route = createFileRoute("/terms")({
       { name: "description", content: "Terms governing use of Visionary AI Automations' website and services." },
       { property: "og:title", content: "Terms of Service — Visionary AI Automations" },
       { property: "og:description", content: "Terms governing use of Visionary AI Automations' website and services." },
-      { property: "og:url", content: "/terms" },
+      { property: "og:url", content: "https://www.visionaryaiautomations.com/terms" },
     ],
-    links: [{ rel: "canonical", href: "/terms" }],
+    links: [{ rel: "canonical", href: "https://www.visionaryaiautomations.com/terms" }],
   }),
   component: Terms,
 });
