@@ -13,6 +13,8 @@ import { Route as TrialRouteImport } from './routes/trial'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as AiChatbotForRealEstateHyderabadRouteImport } from './routes/ai-chatbot-for-real-estate-hyderabad'
+import { Route as AiChatbotForClinicsHyderabadRouteImport } from './routes/ai-chatbot-for-clinics-hyderabad'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
@@ -45,6 +47,18 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiChatbotForRealEstateHyderabadRoute =
+  AiChatbotForRealEstateHyderabadRouteImport.update({
+    id: '/ai-chatbot-for-real-estate-hyderabad',
+    path: '/ai-chatbot-for-real-estate-hyderabad',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AiChatbotForClinicsHyderabadRoute =
+  AiChatbotForClinicsHyderabadRouteImport.update({
+    id: '/ai-chatbot-for-clinics-hyderabad',
+    path: '/ai-chatbot-for-clinics-hyderabad',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
@@ -105,6 +119,8 @@ const ServicesAiAutomationRoute = ServicesAiAutomationRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/ai-chatbot-for-clinics-hyderabad': typeof AiChatbotForClinicsHyderabadRoute
+  '/ai-chatbot-for-real-estate-hyderabad': typeof AiChatbotForRealEstateHyderabadRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
@@ -122,6 +138,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/ai-chatbot-for-clinics-hyderabad': typeof AiChatbotForClinicsHyderabadRoute
+  '/ai-chatbot-for-real-estate-hyderabad': typeof AiChatbotForRealEstateHyderabadRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
@@ -140,6 +158,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/ai-chatbot-for-clinics-hyderabad': typeof AiChatbotForClinicsHyderabadRoute
+  '/ai-chatbot-for-real-estate-hyderabad': typeof AiChatbotForRealEstateHyderabadRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/thank-you': typeof ThankYouRoute
@@ -159,6 +179,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$'
+    | '/ai-chatbot-for-clinics-hyderabad'
+    | '/ai-chatbot-for-real-estate-hyderabad'
     | '/privacy'
     | '/terms'
     | '/thank-you'
@@ -176,6 +198,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$'
+    | '/ai-chatbot-for-clinics-hyderabad'
+    | '/ai-chatbot-for-real-estate-hyderabad'
     | '/privacy'
     | '/terms'
     | '/thank-you'
@@ -193,6 +217,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$'
+    | '/ai-chatbot-for-clinics-hyderabad'
+    | '/ai-chatbot-for-real-estate-hyderabad'
     | '/privacy'
     | '/terms'
     | '/thank-you'
@@ -211,6 +237,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
+  AiChatbotForClinicsHyderabadRoute: typeof AiChatbotForClinicsHyderabadRoute
+  AiChatbotForRealEstateHyderabadRoute: typeof AiChatbotForRealEstateHyderabadRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
   ThankYouRoute: typeof ThankYouRoute
@@ -254,6 +282,20 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-chatbot-for-real-estate-hyderabad': {
+      id: '/ai-chatbot-for-real-estate-hyderabad'
+      path: '/ai-chatbot-for-real-estate-hyderabad'
+      fullPath: '/ai-chatbot-for-real-estate-hyderabad'
+      preLoaderRoute: typeof AiChatbotForRealEstateHyderabadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-chatbot-for-clinics-hyderabad': {
+      id: '/ai-chatbot-for-clinics-hyderabad'
+      path: '/ai-chatbot-for-clinics-hyderabad'
+      fullPath: '/ai-chatbot-for-clinics-hyderabad'
+      preLoaderRoute: typeof AiChatbotForClinicsHyderabadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$': {
@@ -339,6 +381,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
+  AiChatbotForClinicsHyderabadRoute: AiChatbotForClinicsHyderabadRoute,
+  AiChatbotForRealEstateHyderabadRoute: AiChatbotForRealEstateHyderabadRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
   ThankYouRoute: ThankYouRoute,

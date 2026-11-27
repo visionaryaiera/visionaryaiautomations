@@ -125,7 +125,7 @@ const whyUs = [
   { icon: Sparkles, title: "Premium Design", desc: "Award-worthy craft on every pixel." },
   { icon: Target, title: "Business Focused", desc: "Every build tied to a revenue KPI." },
   { icon: Lock, title: "Secure by design", desc: "Official WhatsApp API, encrypted data, delete-on-request." },
-  { icon: Scaling, title: "Scalable Solutions", desc: "Built to survive 100× growth." },
+  { icon: Scaling, title: "Scalable Solutions", desc: "Built to grow with your business." },
   { icon: Headset, title: "Dedicated Support", desc: "A team on call, not a ticket queue." },
   { icon: ShieldCheck, title: "Latest AI Tech", desc: "GPT-5, Claude, Gemini — always current." },
 ];
@@ -143,7 +143,7 @@ const process = [
 
 const industries = [
   { icon: Stethoscope, label: "Dental Clinics & Hospitals", problem: "Missed calls and no-shows drain revenue.", solution: "AI receptionist books, reminds, and follows up 24/7.", benefit: "Full appointment book, zero missed calls." },
-  { icon: Building2, label: "Real Estate", problem: "Slow lead response kills conversion.", solution: "WhatsApp AI qualifies buyers in seconds.", benefit: "3× site visits, faster closings." },
+  { icon: Building2, label: "Real Estate", problem: "Slow lead response kills conversion.", solution: "WhatsApp AI qualifies buyers in seconds.", benefit: "More site visits, faster closings." },
   { icon: GraduationCap, label: "Education", problem: "Admissions teams overwhelmed by enquiries.", solution: "Automated funnels handle enquiry → counseling → enrollment.", benefit: "Higher enrollment, lower cost per lead." },
   { icon: UtensilsCrossed, label: "Restaurants", problem: "Manual bookings and repeat-order chaos.", solution: "WhatsApp bot for reservations, menus, and reorders.", benefit: "More covers, loyal regulars." },
   { icon: ShoppingBag, label: "Retail Stores", problem: "Walk-ins fluctuate, WhatsApp catalogs go stale.", solution: "AI catalog + reorder assistant on WhatsApp.", benefit: "Higher AOV, sticky customers." },
@@ -1035,12 +1035,16 @@ export default function Landing() {
                 { l: "About", h: "#about" },
                 { l: "FAQ", h: "#faq" },
                 { l: "Industries", h: "#industries" },
+                { l: "AI for clinics", h: "/ai-chatbot-for-clinics-hyderabad" },
+                { l: "AI for real estate", h: "/ai-chatbot-for-real-estate-hyderabad" },
+                { l: "Free 3-day trial", h: "/trial" },
               ]}
             />
             <FooterCol
               title="Legal"
               links={[
                 { l: "Terms", h: "/terms" },
+                { l: "Privacy", h: "/privacy" },
               ]}
             />
           </div>
