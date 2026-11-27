@@ -468,6 +468,28 @@ export default function Landing() {
           </div>
         </section>
 
+        {/* 20-second explainer video (loads only when played) */}
+        <section className="mx-auto max-w-4xl px-6 pb-16">
+          <p className="mb-2 text-center text-[10px] font-medium uppercase tracking-[0.25em] text-zinc-500">
+            See it in 20 seconds
+          </p>
+          <h2 className="mb-6 text-center text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+            From "Hi" to a booked appointment – automatically
+          </h2>
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-surface/60 shadow-2xl">
+            <video
+              className="block aspect-video w-full"
+              controls
+              playsInline
+              preload="none"
+              poster="/video/vai-promo-poster.jpg"
+              aria-label="20-second video: how the Visionary AI WhatsApp assistant replies and books appointments"
+            >
+              <source src="/video/vai-promo.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </section>
+
         {/* Tech marquee */}
         <section className="border-y border-white/5 bg-canvas py-12">
           <p className="mb-8 text-center text-[10px] font-medium uppercase tracking-[0.25em] text-zinc-500">
