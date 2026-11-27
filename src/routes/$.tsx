@@ -47,6 +47,9 @@ const REDIRECTS: Record<string, string> = {
 export const Route = createFileRoute("/$")({
   beforeLoad: ({ params }) => {
     const key = String((params as { _splat?: string })._splat || "").replace(/\/+$/, "").toLowerCase();
+    // Owner shortcut: website /admin opens the CRM dashboard on the bot server.
+    if (key === "admin" || key === "dashboard" || key === "crm")
+      throw redirect({ href: "https://api.visionaryaiautomations.com/admin", statusCode: 302 });
     const to = REDIRECTS[key];
     if (to) throw redirect({ href: to, statusCode: 301 });
     throw notFound();
