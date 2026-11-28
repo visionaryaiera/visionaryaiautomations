@@ -1107,7 +1107,7 @@ export default function Landing() {
               <span className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-accent-cyan">
                 Wait — before you go
               </span>
-              <h3 className="mt-4 text-2xl font-semibold tracking-tight">Free 30-min AI strategy call</h3>
+              <h3 className="mt-4 text-2xl font-semibold tracking-tight">Free 10-min AI call</h3>
               <p className="mt-3 text-sm text-zinc-400">
                 We'll map your top 3 highest-ROI automations — no obligation, no pitch.
               </p>

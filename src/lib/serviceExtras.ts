@@ -67,7 +67,7 @@ export const SERVICE_EXTRAS: Record<string, ServiceExtra> = {
   "ai-automation": {
     before: ["Copy-pasting leads between apps", "Reports built by hand every week", "Follow-ups depend on someone remembering", "Problems found days later"],
     after: ["Leads flow automatically into your CRM", "Reports and alerts generated for you", "Follow-ups triggered by rules, every time", "Real-time alerts on WhatsApp"],
-    journey: [{ title: "We map your process", desc: "A 30-minute call to find the repetitive work." }, { title: "We build the workflow", desc: "WhatsApp, forms, sheets, CRM and email connected." }, { title: "You approve & go live", desc: "Tested with real data before switching on." }, { title: "We monitor & improve", desc: "Alerts if anything breaks; monthly improvements." }],
+    journey: [{ title: "We map your process", desc: "A quick 10-minute call to find the repetitive work." }, { title: "We build the workflow", desc: "WhatsApp, forms, sheets, CRM and email connected." }, { title: "You approve & go live", desc: "Tested with real data before switching on." }, { title: "We monitor & improve", desc: "Alerts if anything breaks; monthly improvements." }],
     shots: [{ src: "/showcase/automation-1.png", title: "Lead workflow", desc: "New enquiry \u2192 qualify \u2192 CRM \u2192 team alert, fully automatic." }, { src: "/showcase/automation-2.png", title: "Daily summary on WhatsApp", desc: "Leads, bookings and follow-ups in one message every morning." }],
     problems: [
       { title: "Manual copy-paste work", desc: "Leads, invoices and reports moved by hand between tools." },
