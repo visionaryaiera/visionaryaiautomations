@@ -81,7 +81,7 @@ function Privacy() {
 
           <H>Contact</H>
           <p>
-            Visionary AI Automations, MBD Complex, HMT Nagar, Nacharam, Hyderabad, Telangana, India.
+            Visionary AI Automations, HMT Nagar, Nacharam, Hyderabad, Telangana, India.
             WhatsApp / phone: +91 94910 71248.
           </p>
         </div>

@@ -54,6 +54,7 @@ import { getFormUrl, trackFormClick } from "@/lib/forms";
 import { AIShowcase } from "./AIShowcase";
 import { Pricing } from "./Pricing";
 import { getServiceByKey } from "@/lib/services";
+import { ServiceVisual } from "./ServiceVisual";
 
 const nav = [
   { label: "Services", href: "#services" },
@@ -671,11 +672,7 @@ export default function Landing() {
                       </span>
                     </div>
                   </div>
-                  <div className="hidden md:flex shrink-0">
-                    <span className={`font-mono text-3xl font-bold tracking-tight text-transparent transition-all duration-500 group-hover:scale-110`} style={{ WebkitTextStroke: "1px rgba(255,255,255,0.15)" }}>
-                      0{i + 1}
-                    </span>
-                  </div>
+                  <ServiceVisual slug={getServiceByKey(s.key)?.slug} />
                 </div>
               </motion.div>
             ))}
@@ -902,7 +899,7 @@ export default function Landing() {
               {[
                 { icon: MessageCircle, label: "WhatsApp", value: WHATSAPP_DISPLAY, href: buildWhatsAppUrl("general"), track: "contact-tile-whatsapp" },
                 { icon: PhoneIcon, label: "Phone", value: WHATSAPP_DISPLAY, href: "tel:+919491071248", track: "contact-tile-phone" },
-                { icon: MapPin, label: "Office", value: "MBD Complex, HMT Nagar, Nacharam, Hyderabad", href: "https://g.page/r/CU7YSR-bsjUJEBM", track: "contact-tile-office" },
+                { icon: MapPin, label: "Office", value: "HMT Nagar, Nacharam, Hyderabad", href: "https://g.page/r/CU7YSR-bsjUJEBM", track: "contact-tile-office" },
                 { icon: MessageCircle, label: "Availability", value: "AI 24/7 · Team Mon–Sat 7 AM–7 PM", href: buildWhatsAppUrl("general"), track: "contact-tile-availability" },
               ].map((c) => (
                 <a
@@ -1034,9 +1031,7 @@ export default function Landing() {
               Architecting the future of autonomous business operations.
             </p>
             <address className="mt-4 text-sm not-italic leading-relaxed text-zinc-500">
-              MBD Complex, HMT Nagar, Nacharam,
-              <br />
-              Hyderabad, Telangana 500076
+              HMT Nagar, Nacharam, Hyderabad
               <br />
               <a href="tel:+919491071248" className="hover:text-zinc-300">+91 94910 71248</a>
             </address>
